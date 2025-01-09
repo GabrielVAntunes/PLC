@@ -1,0 +1,22 @@
+INT a
+
+OUTPUT "Introduza um número para verificar a sua paridade\n"
+
+a KEEPS INPUT
+
+OUTPUT "Input: "
+OUTPUT a
+OUTPUT "\n"
+
+IF (a REMAINDER 2 EQUAL 0) {
+    OUTPUT a
+    OUTPUT " é par\n"
+
+    IF ((a GREATER -1) AND (a LOWEREQUAL 0)) {
+        OUTPUT "Pois é, muita gente não sabe mas o 0 também é par\n"
+    } END
+
+} ELSE {
+    OUTPUT a
+    OUTPUT " é ímpar\n"
+} END

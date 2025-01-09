@@ -1,0 +1,8 @@
+MATRIX a KEEPS [[1,2],[3,4]]
+ARRAY b KEEPS [1,2,3]
+
+a KEEPS [[1],[2]]
+a KEEPS [1,2]
+
+b KEEPS [1,2,3,4,5]
+b KEEPS [[1,2,3],[4,5,6]]

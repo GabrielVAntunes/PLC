@@ -1,0 +1,10 @@
+MATRIX a KEEPS [[1,2,3],[4,5,6],[7,8,9]]
+MATRIX b KEEPS [[1,2],[3,4]]
+
+INT c
+
+ARRAY d KEEPS [1,2,3]
+
+a(1) SWAP b(0)
+c(1) SWAP d(1)
+a(0) SWAP a(2,2)

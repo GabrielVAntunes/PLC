@@ -1,0 +1,3813 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> Program
+Rule 1     Program -> Decls
+Rule 2     Program -> Decls Body
+Rule 3     Program -> Body
+Rule 4     Decls -> Declaration Decls
+Rule 5     Decls -> Declaration
+Rule 6     Body -> Assignment Body
+Rule 7     Body -> Statement Body
+Rule 8     Body -> Assignment
+Rule 9     Body -> Statement
+Rule 10    Declaration -> INT ID
+Rule 11    Declaration -> INT ID KEEPS Expression
+Rule 12    Declaration -> ARRAY ID
+Rule 13    Declaration -> ARRAY ID LPAREN Num RPAREN
+Rule 14    Declaration -> ARRAY ID KEEPS LBRACKET List RBRACKET
+Rule 15    Declaration -> ARRAY ID KEEPS ID
+Rule 16    Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN
+Rule 17    Declaration -> MATRIX ID
+Rule 18    Declaration -> MATRIX ID LPAREN Num COMMA Num RPAREN
+Rule 19    Declaration -> MATRIX ID KEEPS LBRACKET Matrix RBRACKET
+Rule 20    Declaration -> MATRIX ID KEEPS ID
+Rule 21    Assignment -> ID KEEPS Expression
+Rule 22    Assignment -> ID KEEPS LBRACKET List RBRACKET
+Rule 23    Assignment -> ID LPAREN Expression RPAREN KEEPS Expression
+Rule 24    Assignment -> ID KEEPS LBRACKET Matrix RBRACKET
+Rule 25    Assignment -> ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression
+Rule 26    Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET
+Rule 27    Assignment -> ID PLUS PLUS
+Rule 28    Assignment -> ID MINUS MINUS
+Rule 29    Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+Rule 30    Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+Rule 31    Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+Rule 32    Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+Rule 33    List -> Num COMMA List
+Rule 34    List -> Num
+Rule 35    List -> <empty>
+Rule 36    Matrix -> LBRACKET List RBRACKET COMMA Matrix
+Rule 37    Matrix -> LBRACKET List RBRACKET
+Rule 38    Matrix -> <empty>
+Rule 39    Num -> NUM
+Rule 40    Num -> NEGATIVE NUM
+Rule 41    Expression -> Num
+Rule 42    Expression -> ID
+Rule 43    Expression -> INPUT
+Rule 44    Expression -> Operation
+Rule 45    Expression -> SEARCH ID LPAREN Expression RPAREN
+Rule 46    Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN
+Rule 47    Operation -> Expression PLUS Expression
+Rule 48    Operation -> Expression MINUS Expression
+Rule 49    Operation -> Expression TIMES Expression
+Rule 50    Operation -> Expression DIVIDED_BY Expression
+Rule 51    Operation -> Expression REMAINDER Expression
+Rule 52    Statement -> If
+Rule 53    Statement -> While_Do
+Rule 54    Statement -> Repeat_Until
+Rule 55    Statement -> For_Do
+Rule 56    Statement -> Output
+Rule 57    If -> IF Comparison LBRACE Body RBRACE END
+Rule 58    If -> IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END
+Rule 59    While_Do -> WHILE Comparison DO LBRACE Body RBRACE END
+Rule 60    Repeat_Until -> REPEAT LBRACE Body RBRACE UNTIL Comparison END
+Rule 61    For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+Rule 62    Output -> OUTPUT TEXT
+Rule 63    Output -> OUTPUT ID
+Rule 64    Output -> OUTPUT Num
+Rule 65    Output -> OUTPUT LBRACKET List RBRACKET
+Rule 66    Output -> OUTPUT LBRACKET Matrix RBRACKET
+Rule 67    Comparison -> NOT Comparison
+Rule 68    Comparison -> LPAREN Expression EQUAL Expression RPAREN
+Rule 69    Comparison -> LPAREN Expression NOT_EQUAL Expression RPAREN
+Rule 70    Comparison -> LPAREN Expression GREATER Expression RPAREN
+Rule 71    Comparison -> LPAREN Expression GREATER_EQUAL Expression RPAREN
+Rule 72    Comparison -> LPAREN Expression LOWER Expression RPAREN
+Rule 73    Comparison -> LPAREN Expression LOWER_EQUAL Expression RPAREN
+Rule 74    Comparison -> LPAREN Comparison AND Comparison RPAREN
+Rule 75    Comparison -> LPAREN Comparison OR Comparison RPAREN
+
+Terminals, with rules where they appear
+
+AND                  : 74
+ARRAY                : 12 13 14 15 16
+COMMA                : 18 25 30 30 31 32 33 36 46
+DIVIDED_BY           : 50
+DO                   : 59 61
+ELSE                 : 58
+END                  : 57 58 59 60 61
+EQUAL                : 68
+FOR                  : 61
+GREATER              : 70
+GREATER_EQUAL        : 71
+ID                   : 10 11 12 13 14 15 15 16 16 17 18 19 20 20 21 22 23 24 25 26 27 28 29 29 30 30 31 31 32 32 42 45 46 63
+IF                   : 57 58
+INPUT                : 43
+INT                  : 10 11
+KEEPS                : 11 14 15 16 19 20 21 22 23 24 25 26
+LBRACE               : 57 58 58 59 60 61
+LBRACKET             : 14 19 22 24 26 36 37 65 66
+LOWER                : 72
+LOWER_EQUAL          : 73
+LPAREN               : 13 16 18 23 25 26 29 29 30 30 31 31 32 32 45 46 61 68 69 70 71 72 73 74 75
+MATRIX               : 17 18 19 20
+MINUS                : 28 28 48
+NEGATIVE             : 40
+NOT                  : 67
+NOT_EQUAL            : 69
+NUM                  : 39 40
+OR                   : 75
+OUTPUT               : 62 63 64 65 66
+PLUS                 : 27 27 47
+RBRACE               : 57 58 58 59 60 61
+RBRACKET             : 14 19 22 24 26 36 37 65 66
+REMAINDER            : 51
+REPEAT               : 60
+RPAREN               : 13 16 18 23 25 26 29 29 30 30 31 31 32 32 45 46 61 68 69 70 71 72 73 74 75
+SEARCH               : 16 45 46
+SEMICOLON            : 61 61
+SWAP                 : 29 30 31 32
+TEXT                 : 62
+TIMES                : 49
+UNTIL                : 60
+WHILE                : 59
+error                : 
+
+Nonterminals, with rules where they appear
+
+Assignment           : 6 8 61 61
+Body                 : 2 3 6 7 57 58 58 59 60 61
+Comparison           : 57 58 59 60 61 67 74 74 75 75
+Declaration          : 4 5
+Decls                : 1 2 4
+Expression           : 11 16 21 23 23 25 25 25 26 29 29 30 30 30 30 31 31 31 32 32 32 45 46 46 47 47 48 48 49 49 50 50 51 51 68 68 69 69 70 70 71 71 72 72 73 73
+For_Do               : 55
+If                   : 52
+List                 : 14 22 26 33 36 37 65
+Matrix               : 19 24 36 66
+Num                  : 13 18 18 33 34 41 64
+Operation            : 44
+Output               : 56
+Program              : 0
+Repeat_Until         : 54
+Statement            : 7 9
+While_Do             : 53
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Program
+    (1) Program -> . Decls
+    (2) Program -> . Decls Body
+    (3) Program -> . Body
+    (4) Decls -> . Declaration Decls
+    (5) Decls -> . Declaration
+    (6) Body -> . Assignment Body
+    (7) Body -> . Statement Body
+    (8) Body -> . Assignment
+    (9) Body -> . Statement
+    (10) Declaration -> . INT ID
+    (11) Declaration -> . INT ID KEEPS Expression
+    (12) Declaration -> . ARRAY ID
+    (13) Declaration -> . ARRAY ID LPAREN Num RPAREN
+    (14) Declaration -> . ARRAY ID KEEPS LBRACKET List RBRACKET
+    (15) Declaration -> . ARRAY ID KEEPS ID
+    (16) Declaration -> . ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN
+    (17) Declaration -> . MATRIX ID
+    (18) Declaration -> . MATRIX ID LPAREN Num COMMA Num RPAREN
+    (19) Declaration -> . MATRIX ID KEEPS LBRACKET Matrix RBRACKET
+    (20) Declaration -> . MATRIX ID KEEPS ID
+    (21) Assignment -> . ID KEEPS Expression
+    (22) Assignment -> . ID KEEPS LBRACKET List RBRACKET
+    (23) Assignment -> . ID LPAREN Expression RPAREN KEEPS Expression
+    (24) Assignment -> . ID KEEPS LBRACKET Matrix RBRACKET
+    (25) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> . ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET
+    (27) Assignment -> . ID PLUS PLUS
+    (28) Assignment -> . ID MINUS MINUS
+    (29) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (52) Statement -> . If
+    (53) Statement -> . While_Do
+    (54) Statement -> . Repeat_Until
+    (55) Statement -> . For_Do
+    (56) Statement -> . Output
+    (57) If -> . IF Comparison LBRACE Body RBRACE END
+    (58) If -> . IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END
+    (59) While_Do -> . WHILE Comparison DO LBRACE Body RBRACE END
+    (60) Repeat_Until -> . REPEAT LBRACE Body RBRACE UNTIL Comparison END
+    (61) For_Do -> . FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+    (62) Output -> . OUTPUT TEXT
+    (63) Output -> . OUTPUT ID
+    (64) Output -> . OUTPUT Num
+    (65) Output -> . OUTPUT LBRACKET List RBRACKET
+    (66) Output -> . OUTPUT LBRACKET Matrix RBRACKET
+
+    INT             shift and go to state 7
+    ARRAY           shift and go to state 9
+    MATRIX          shift and go to state 10
+    ID              shift and go to state 8
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    REPEAT          shift and go to state 18
+    FOR             shift and go to state 19
+    OUTPUT          shift and go to state 20
+
+    Program                        shift and go to state 1
+    Decls                          shift and go to state 2
+    Body                           shift and go to state 3
+    Declaration                    shift and go to state 4
+    Assignment                     shift and go to state 5
+    Statement                      shift and go to state 6
+    If                             shift and go to state 11
+    While_Do                       shift and go to state 12
+    Repeat_Until                   shift and go to state 13
+    For_Do                         shift and go to state 14
+    Output                         shift and go to state 15
+
+state 1
+
+    (0) S' -> Program .
+
+
+
+state 2
+
+    (1) Program -> Decls .
+    (2) Program -> Decls . Body
+    (6) Body -> . Assignment Body
+    (7) Body -> . Statement Body
+    (8) Body -> . Assignment
+    (9) Body -> . Statement
+    (21) Assignment -> . ID KEEPS Expression
+    (22) Assignment -> . ID KEEPS LBRACKET List RBRACKET
+    (23) Assignment -> . ID LPAREN Expression RPAREN KEEPS Expression
+    (24) Assignment -> . ID KEEPS LBRACKET Matrix RBRACKET
+    (25) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> . ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET
+    (27) Assignment -> . ID PLUS PLUS
+    (28) Assignment -> . ID MINUS MINUS
+    (29) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (52) Statement -> . If
+    (53) Statement -> . While_Do
+    (54) Statement -> . Repeat_Until
+    (55) Statement -> . For_Do
+    (56) Statement -> . Output
+    (57) If -> . IF Comparison LBRACE Body RBRACE END
+    (58) If -> . IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END
+    (59) While_Do -> . WHILE Comparison DO LBRACE Body RBRACE END
+    (60) Repeat_Until -> . REPEAT LBRACE Body RBRACE UNTIL Comparison END
+    (61) For_Do -> . FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+    (62) Output -> . OUTPUT TEXT
+    (63) Output -> . OUTPUT ID
+    (64) Output -> . OUTPUT Num
+    (65) Output -> . OUTPUT LBRACKET List RBRACKET
+    (66) Output -> . OUTPUT LBRACKET Matrix RBRACKET
+
+    $end            reduce using rule 1 (Program -> Decls .)
+    ID              shift and go to state 8
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    REPEAT          shift and go to state 18
+    FOR             shift and go to state 19
+    OUTPUT          shift and go to state 20
+
+    Body                           shift and go to state 21
+    Assignment                     shift and go to state 5
+    Statement                      shift and go to state 6
+    If                             shift and go to state 11
+    While_Do                       shift and go to state 12
+    Repeat_Until                   shift and go to state 13
+    For_Do                         shift and go to state 14
+    Output                         shift and go to state 15
+
+state 3
+
+    (3) Program -> Body .
+
+    $end            reduce using rule 3 (Program -> Body .)
+
+
+state 4
+
+    (4) Decls -> Declaration . Decls
+    (5) Decls -> Declaration .
+    (4) Decls -> . Declaration Decls
+    (5) Decls -> . Declaration
+    (10) Declaration -> . INT ID
+    (11) Declaration -> . INT ID KEEPS Expression
+    (12) Declaration -> . ARRAY ID
+    (13) Declaration -> . ARRAY ID LPAREN Num RPAREN
+    (14) Declaration -> . ARRAY ID KEEPS LBRACKET List RBRACKET
+    (15) Declaration -> . ARRAY ID KEEPS ID
+    (16) Declaration -> . ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN
+    (17) Declaration -> . MATRIX ID
+    (18) Declaration -> . MATRIX ID LPAREN Num COMMA Num RPAREN
+    (19) Declaration -> . MATRIX ID KEEPS LBRACKET Matrix RBRACKET
+    (20) Declaration -> . MATRIX ID KEEPS ID
+
+    ID              reduce using rule 5 (Decls -> Declaration .)
+    IF              reduce using rule 5 (Decls -> Declaration .)
+    WHILE           reduce using rule 5 (Decls -> Declaration .)
+    REPEAT          reduce using rule 5 (Decls -> Declaration .)
+    FOR             reduce using rule 5 (Decls -> Declaration .)
+    OUTPUT          reduce using rule 5 (Decls -> Declaration .)
+    $end            reduce using rule 5 (Decls -> Declaration .)
+    INT             shift and go to state 7
+    ARRAY           shift and go to state 9
+    MATRIX          shift and go to state 10
+
+    Declaration                    shift and go to state 4
+    Decls                          shift and go to state 22
+
+state 5
+
+    (6) Body -> Assignment . Body
+    (8) Body -> Assignment .
+    (6) Body -> . Assignment Body
+    (7) Body -> . Statement Body
+    (8) Body -> . Assignment
+    (9) Body -> . Statement
+    (21) Assignment -> . ID KEEPS Expression
+    (22) Assignment -> . ID KEEPS LBRACKET List RBRACKET
+    (23) Assignment -> . ID LPAREN Expression RPAREN KEEPS Expression
+    (24) Assignment -> . ID KEEPS LBRACKET Matrix RBRACKET
+    (25) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> . ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET
+    (27) Assignment -> . ID PLUS PLUS
+    (28) Assignment -> . ID MINUS MINUS
+    (29) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (52) Statement -> . If
+    (53) Statement -> . While_Do
+    (54) Statement -> . Repeat_Until
+    (55) Statement -> . For_Do
+    (56) Statement -> . Output
+    (57) If -> . IF Comparison LBRACE Body RBRACE END
+    (58) If -> . IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END
+    (59) While_Do -> . WHILE Comparison DO LBRACE Body RBRACE END
+    (60) Repeat_Until -> . REPEAT LBRACE Body RBRACE UNTIL Comparison END
+    (61) For_Do -> . FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+    (62) Output -> . OUTPUT TEXT
+    (63) Output -> . OUTPUT ID
+    (64) Output -> . OUTPUT Num
+    (65) Output -> . OUTPUT LBRACKET List RBRACKET
+    (66) Output -> . OUTPUT LBRACKET Matrix RBRACKET
+
+    $end            reduce using rule 8 (Body -> Assignment .)
+    RBRACE          reduce using rule 8 (Body -> Assignment .)
+    ID              shift and go to state 8
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    REPEAT          shift and go to state 18
+    FOR             shift and go to state 19
+    OUTPUT          shift and go to state 20
+
+    Assignment                     shift and go to state 5
+    Body                           shift and go to state 23
+    Statement                      shift and go to state 6
+    If                             shift and go to state 11
+    While_Do                       shift and go to state 12
+    Repeat_Until                   shift and go to state 13
+    For_Do                         shift and go to state 14
+    Output                         shift and go to state 15
+
+state 6
+
+    (7) Body -> Statement . Body
+    (9) Body -> Statement .
+    (6) Body -> . Assignment Body
+    (7) Body -> . Statement Body
+    (8) Body -> . Assignment
+    (9) Body -> . Statement
+    (21) Assignment -> . ID KEEPS Expression
+    (22) Assignment -> . ID KEEPS LBRACKET List RBRACKET
+    (23) Assignment -> . ID LPAREN Expression RPAREN KEEPS Expression
+    (24) Assignment -> . ID KEEPS LBRACKET Matrix RBRACKET
+    (25) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> . ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET
+    (27) Assignment -> . ID PLUS PLUS
+    (28) Assignment -> . ID MINUS MINUS
+    (29) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (52) Statement -> . If
+    (53) Statement -> . While_Do
+    (54) Statement -> . Repeat_Until
+    (55) Statement -> . For_Do
+    (56) Statement -> . Output
+    (57) If -> . IF Comparison LBRACE Body RBRACE END
+    (58) If -> . IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END
+    (59) While_Do -> . WHILE Comparison DO LBRACE Body RBRACE END
+    (60) Repeat_Until -> . REPEAT LBRACE Body RBRACE UNTIL Comparison END
+    (61) For_Do -> . FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+    (62) Output -> . OUTPUT TEXT
+    (63) Output -> . OUTPUT ID
+    (64) Output -> . OUTPUT Num
+    (65) Output -> . OUTPUT LBRACKET List RBRACKET
+    (66) Output -> . OUTPUT LBRACKET Matrix RBRACKET
+
+    $end            reduce using rule 9 (Body -> Statement .)
+    RBRACE          reduce using rule 9 (Body -> Statement .)
+    ID              shift and go to state 8
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    REPEAT          shift and go to state 18
+    FOR             shift and go to state 19
+    OUTPUT          shift and go to state 20
+
+    Statement                      shift and go to state 6
+    Body                           shift and go to state 24
+    Assignment                     shift and go to state 5
+    If                             shift and go to state 11
+    While_Do                       shift and go to state 12
+    Repeat_Until                   shift and go to state 13
+    For_Do                         shift and go to state 14
+    Output                         shift and go to state 15
+
+state 7
+
+    (10) Declaration -> INT . ID
+    (11) Declaration -> INT . ID KEEPS Expression
+
+    ID              shift and go to state 25
+
+
+state 8
+
+    (21) Assignment -> ID . KEEPS Expression
+    (22) Assignment -> ID . KEEPS LBRACKET List RBRACKET
+    (23) Assignment -> ID . LPAREN Expression RPAREN KEEPS Expression
+    (24) Assignment -> ID . KEEPS LBRACKET Matrix RBRACKET
+    (25) Assignment -> ID . LPAREN Expression COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> ID . LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET
+    (27) Assignment -> ID . PLUS PLUS
+    (28) Assignment -> ID . MINUS MINUS
+    (29) Assignment -> ID . LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> ID . LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> ID . LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> ID . LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+
+    KEEPS           shift and go to state 26
+    LPAREN          shift and go to state 27
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+
+
+state 9
+
+    (12) Declaration -> ARRAY . ID
+    (13) Declaration -> ARRAY . ID LPAREN Num RPAREN
+    (14) Declaration -> ARRAY . ID KEEPS LBRACKET List RBRACKET
+    (15) Declaration -> ARRAY . ID KEEPS ID
+    (16) Declaration -> ARRAY . ID KEEPS SEARCH ID LPAREN Expression RPAREN
+
+    ID              shift and go to state 30
+
+
+state 10
+
+    (17) Declaration -> MATRIX . ID
+    (18) Declaration -> MATRIX . ID LPAREN Num COMMA Num RPAREN
+    (19) Declaration -> MATRIX . ID KEEPS LBRACKET Matrix RBRACKET
+    (20) Declaration -> MATRIX . ID KEEPS ID
+
+    ID              shift and go to state 31
+
+
+state 11
+
+    (52) Statement -> If .
+
+    ID              reduce using rule 52 (Statement -> If .)
+    IF              reduce using rule 52 (Statement -> If .)
+    WHILE           reduce using rule 52 (Statement -> If .)
+    REPEAT          reduce using rule 52 (Statement -> If .)
+    FOR             reduce using rule 52 (Statement -> If .)
+    OUTPUT          reduce using rule 52 (Statement -> If .)
+    $end            reduce using rule 52 (Statement -> If .)
+    RBRACE          reduce using rule 52 (Statement -> If .)
+
+
+state 12
+
+    (53) Statement -> While_Do .
+
+    ID              reduce using rule 53 (Statement -> While_Do .)
+    IF              reduce using rule 53 (Statement -> While_Do .)
+    WHILE           reduce using rule 53 (Statement -> While_Do .)
+    REPEAT          reduce using rule 53 (Statement -> While_Do .)
+    FOR             reduce using rule 53 (Statement -> While_Do .)
+    OUTPUT          reduce using rule 53 (Statement -> While_Do .)
+    $end            reduce using rule 53 (Statement -> While_Do .)
+    RBRACE          reduce using rule 53 (Statement -> While_Do .)
+
+
+state 13
+
+    (54) Statement -> Repeat_Until .
+
+    ID              reduce using rule 54 (Statement -> Repeat_Until .)
+    IF              reduce using rule 54 (Statement -> Repeat_Until .)
+    WHILE           reduce using rule 54 (Statement -> Repeat_Until .)
+    REPEAT          reduce using rule 54 (Statement -> Repeat_Until .)
+    FOR             reduce using rule 54 (Statement -> Repeat_Until .)
+    OUTPUT          reduce using rule 54 (Statement -> Repeat_Until .)
+    $end            reduce using rule 54 (Statement -> Repeat_Until .)
+    RBRACE          reduce using rule 54 (Statement -> Repeat_Until .)
+
+
+state 14
+
+    (55) Statement -> For_Do .
+
+    ID              reduce using rule 55 (Statement -> For_Do .)
+    IF              reduce using rule 55 (Statement -> For_Do .)
+    WHILE           reduce using rule 55 (Statement -> For_Do .)
+    REPEAT          reduce using rule 55 (Statement -> For_Do .)
+    FOR             reduce using rule 55 (Statement -> For_Do .)
+    OUTPUT          reduce using rule 55 (Statement -> For_Do .)
+    $end            reduce using rule 55 (Statement -> For_Do .)
+    RBRACE          reduce using rule 55 (Statement -> For_Do .)
+
+
+state 15
+
+    (56) Statement -> Output .
+
+    ID              reduce using rule 56 (Statement -> Output .)
+    IF              reduce using rule 56 (Statement -> Output .)
+    WHILE           reduce using rule 56 (Statement -> Output .)
+    REPEAT          reduce using rule 56 (Statement -> Output .)
+    FOR             reduce using rule 56 (Statement -> Output .)
+    OUTPUT          reduce using rule 56 (Statement -> Output .)
+    $end            reduce using rule 56 (Statement -> Output .)
+    RBRACE          reduce using rule 56 (Statement -> Output .)
+
+
+state 16
+
+    (57) If -> IF . Comparison LBRACE Body RBRACE END
+    (58) If -> IF . Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END
+    (67) Comparison -> . NOT Comparison
+    (68) Comparison -> . LPAREN Expression EQUAL Expression RPAREN
+    (69) Comparison -> . LPAREN Expression NOT_EQUAL Expression RPAREN
+    (70) Comparison -> . LPAREN Expression GREATER Expression RPAREN
+    (71) Comparison -> . LPAREN Expression GREATER_EQUAL Expression RPAREN
+    (72) Comparison -> . LPAREN Expression LOWER Expression RPAREN
+    (73) Comparison -> . LPAREN Expression LOWER_EQUAL Expression RPAREN
+    (74) Comparison -> . LPAREN Comparison AND Comparison RPAREN
+    (75) Comparison -> . LPAREN Comparison OR Comparison RPAREN
+
+    NOT             shift and go to state 33
+    LPAREN          shift and go to state 34
+
+    Comparison                     shift and go to state 32
+
+state 17
+
+    (59) While_Do -> WHILE . Comparison DO LBRACE Body RBRACE END
+    (67) Comparison -> . NOT Comparison
+    (68) Comparison -> . LPAREN Expression EQUAL Expression RPAREN
+    (69) Comparison -> . LPAREN Expression NOT_EQUAL Expression RPAREN
+    (70) Comparison -> . LPAREN Expression GREATER Expression RPAREN
+    (71) Comparison -> . LPAREN Expression GREATER_EQUAL Expression RPAREN
+    (72) Comparison -> . LPAREN Expression LOWER Expression RPAREN
+    (73) Comparison -> . LPAREN Expression LOWER_EQUAL Expression RPAREN
+    (74) Comparison -> . LPAREN Comparison AND Comparison RPAREN
+    (75) Comparison -> . LPAREN Comparison OR Comparison RPAREN
+
+    NOT             shift and go to state 33
+    LPAREN          shift and go to state 34
+
+    Comparison                     shift and go to state 35
+
+state 18
+
+    (60) Repeat_Until -> REPEAT . LBRACE Body RBRACE UNTIL Comparison END
+
+    LBRACE          shift and go to state 36
+
+
+state 19
+
+    (61) For_Do -> FOR . LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+
+    LPAREN          shift and go to state 37
+
+
+state 20
+
+    (62) Output -> OUTPUT . TEXT
+    (63) Output -> OUTPUT . ID
+    (64) Output -> OUTPUT . Num
+    (65) Output -> OUTPUT . LBRACKET List RBRACKET
+    (66) Output -> OUTPUT . LBRACKET Matrix RBRACKET
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+
+    TEXT            shift and go to state 38
+    ID              shift and go to state 39
+    LBRACKET        shift and go to state 41
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Num                            shift and go to state 40
+
+state 21
+
+    (2) Program -> Decls Body .
+
+    $end            reduce using rule 2 (Program -> Decls Body .)
+
+
+state 22
+
+    (4) Decls -> Declaration Decls .
+
+    ID              reduce using rule 4 (Decls -> Declaration Decls .)
+    IF              reduce using rule 4 (Decls -> Declaration Decls .)
+    WHILE           reduce using rule 4 (Decls -> Declaration Decls .)
+    REPEAT          reduce using rule 4 (Decls -> Declaration Decls .)
+    FOR             reduce using rule 4 (Decls -> Declaration Decls .)
+    OUTPUT          reduce using rule 4 (Decls -> Declaration Decls .)
+    $end            reduce using rule 4 (Decls -> Declaration Decls .)
+
+
+state 23
+
+    (6) Body -> Assignment Body .
+
+    $end            reduce using rule 6 (Body -> Assignment Body .)
+    RBRACE          reduce using rule 6 (Body -> Assignment Body .)
+
+
+state 24
+
+    (7) Body -> Statement Body .
+
+    $end            reduce using rule 7 (Body -> Statement Body .)
+    RBRACE          reduce using rule 7 (Body -> Statement Body .)
+
+
+state 25
+
+    (10) Declaration -> INT ID .
+    (11) Declaration -> INT ID . KEEPS Expression
+
+    INT             reduce using rule 10 (Declaration -> INT ID .)
+    ARRAY           reduce using rule 10 (Declaration -> INT ID .)
+    MATRIX          reduce using rule 10 (Declaration -> INT ID .)
+    ID              reduce using rule 10 (Declaration -> INT ID .)
+    IF              reduce using rule 10 (Declaration -> INT ID .)
+    WHILE           reduce using rule 10 (Declaration -> INT ID .)
+    REPEAT          reduce using rule 10 (Declaration -> INT ID .)
+    FOR             reduce using rule 10 (Declaration -> INT ID .)
+    OUTPUT          reduce using rule 10 (Declaration -> INT ID .)
+    $end            reduce using rule 10 (Declaration -> INT ID .)
+    KEEPS           shift and go to state 44
+
+
+state 26
+
+    (21) Assignment -> ID KEEPS . Expression
+    (22) Assignment -> ID KEEPS . LBRACKET List RBRACKET
+    (24) Assignment -> ID KEEPS . LBRACKET Matrix RBRACKET
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    LBRACKET        shift and go to state 47
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 46
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 27
+
+    (23) Assignment -> ID LPAREN . Expression RPAREN KEEPS Expression
+    (25) Assignment -> ID LPAREN . Expression COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> ID LPAREN . Expression RPAREN KEEPS LBRACKET List RBRACKET
+    (29) Assignment -> ID LPAREN . Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> ID LPAREN . Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> ID LPAREN . Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> ID LPAREN . Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 52
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 28
+
+    (27) Assignment -> ID PLUS . PLUS
+
+    PLUS            shift and go to state 53
+
+
+state 29
+
+    (28) Assignment -> ID MINUS . MINUS
+
+    MINUS           shift and go to state 54
+
+
+state 30
+
+    (12) Declaration -> ARRAY ID .
+    (13) Declaration -> ARRAY ID . LPAREN Num RPAREN
+    (14) Declaration -> ARRAY ID . KEEPS LBRACKET List RBRACKET
+    (15) Declaration -> ARRAY ID . KEEPS ID
+    (16) Declaration -> ARRAY ID . KEEPS SEARCH ID LPAREN Expression RPAREN
+
+    INT             reduce using rule 12 (Declaration -> ARRAY ID .)
+    ARRAY           reduce using rule 12 (Declaration -> ARRAY ID .)
+    MATRIX          reduce using rule 12 (Declaration -> ARRAY ID .)
+    ID              reduce using rule 12 (Declaration -> ARRAY ID .)
+    IF              reduce using rule 12 (Declaration -> ARRAY ID .)
+    WHILE           reduce using rule 12 (Declaration -> ARRAY ID .)
+    REPEAT          reduce using rule 12 (Declaration -> ARRAY ID .)
+    FOR             reduce using rule 12 (Declaration -> ARRAY ID .)
+    OUTPUT          reduce using rule 12 (Declaration -> ARRAY ID .)
+    $end            reduce using rule 12 (Declaration -> ARRAY ID .)
+    LPAREN          shift and go to state 55
+    KEEPS           shift and go to state 56
+
+
+state 31
+
+    (17) Declaration -> MATRIX ID .
+    (18) Declaration -> MATRIX ID . LPAREN Num COMMA Num RPAREN
+    (19) Declaration -> MATRIX ID . KEEPS LBRACKET Matrix RBRACKET
+    (20) Declaration -> MATRIX ID . KEEPS ID
+
+    INT             reduce using rule 17 (Declaration -> MATRIX ID .)
+    ARRAY           reduce using rule 17 (Declaration -> MATRIX ID .)
+    MATRIX          reduce using rule 17 (Declaration -> MATRIX ID .)
+    ID              reduce using rule 17 (Declaration -> MATRIX ID .)
+    IF              reduce using rule 17 (Declaration -> MATRIX ID .)
+    WHILE           reduce using rule 17 (Declaration -> MATRIX ID .)
+    REPEAT          reduce using rule 17 (Declaration -> MATRIX ID .)
+    FOR             reduce using rule 17 (Declaration -> MATRIX ID .)
+    OUTPUT          reduce using rule 17 (Declaration -> MATRIX ID .)
+    $end            reduce using rule 17 (Declaration -> MATRIX ID .)
+    LPAREN          shift and go to state 57
+    KEEPS           shift and go to state 58
+
+
+state 32
+
+    (57) If -> IF Comparison . LBRACE Body RBRACE END
+    (58) If -> IF Comparison . LBRACE Body RBRACE ELSE LBRACE Body RBRACE END
+
+    LBRACE          shift and go to state 59
+
+
+state 33
+
+    (67) Comparison -> NOT . Comparison
+    (67) Comparison -> . NOT Comparison
+    (68) Comparison -> . LPAREN Expression EQUAL Expression RPAREN
+    (69) Comparison -> . LPAREN Expression NOT_EQUAL Expression RPAREN
+    (70) Comparison -> . LPAREN Expression GREATER Expression RPAREN
+    (71) Comparison -> . LPAREN Expression GREATER_EQUAL Expression RPAREN
+    (72) Comparison -> . LPAREN Expression LOWER Expression RPAREN
+    (73) Comparison -> . LPAREN Expression LOWER_EQUAL Expression RPAREN
+    (74) Comparison -> . LPAREN Comparison AND Comparison RPAREN
+    (75) Comparison -> . LPAREN Comparison OR Comparison RPAREN
+
+    NOT             shift and go to state 33
+    LPAREN          shift and go to state 34
+
+    Comparison                     shift and go to state 60
+
+state 34
+
+    (68) Comparison -> LPAREN . Expression EQUAL Expression RPAREN
+    (69) Comparison -> LPAREN . Expression NOT_EQUAL Expression RPAREN
+    (70) Comparison -> LPAREN . Expression GREATER Expression RPAREN
+    (71) Comparison -> LPAREN . Expression GREATER_EQUAL Expression RPAREN
+    (72) Comparison -> LPAREN . Expression LOWER Expression RPAREN
+    (73) Comparison -> LPAREN . Expression LOWER_EQUAL Expression RPAREN
+    (74) Comparison -> LPAREN . Comparison AND Comparison RPAREN
+    (75) Comparison -> LPAREN . Comparison OR Comparison RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (67) Comparison -> . NOT Comparison
+    (68) Comparison -> . LPAREN Expression EQUAL Expression RPAREN
+    (69) Comparison -> . LPAREN Expression NOT_EQUAL Expression RPAREN
+    (70) Comparison -> . LPAREN Expression GREATER Expression RPAREN
+    (71) Comparison -> . LPAREN Expression GREATER_EQUAL Expression RPAREN
+    (72) Comparison -> . LPAREN Expression LOWER Expression RPAREN
+    (73) Comparison -> . LPAREN Expression LOWER_EQUAL Expression RPAREN
+    (74) Comparison -> . LPAREN Comparison AND Comparison RPAREN
+    (75) Comparison -> . LPAREN Comparison OR Comparison RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NOT             shift and go to state 33
+    LPAREN          shift and go to state 34
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 61
+    Comparison                     shift and go to state 62
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 35
+
+    (59) While_Do -> WHILE Comparison . DO LBRACE Body RBRACE END
+
+    DO              shift and go to state 63
+
+
+state 36
+
+    (60) Repeat_Until -> REPEAT LBRACE . Body RBRACE UNTIL Comparison END
+    (6) Body -> . Assignment Body
+    (7) Body -> . Statement Body
+    (8) Body -> . Assignment
+    (9) Body -> . Statement
+    (21) Assignment -> . ID KEEPS Expression
+    (22) Assignment -> . ID KEEPS LBRACKET List RBRACKET
+    (23) Assignment -> . ID LPAREN Expression RPAREN KEEPS Expression
+    (24) Assignment -> . ID KEEPS LBRACKET Matrix RBRACKET
+    (25) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> . ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET
+    (27) Assignment -> . ID PLUS PLUS
+    (28) Assignment -> . ID MINUS MINUS
+    (29) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (52) Statement -> . If
+    (53) Statement -> . While_Do
+    (54) Statement -> . Repeat_Until
+    (55) Statement -> . For_Do
+    (56) Statement -> . Output
+    (57) If -> . IF Comparison LBRACE Body RBRACE END
+    (58) If -> . IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END
+    (59) While_Do -> . WHILE Comparison DO LBRACE Body RBRACE END
+    (60) Repeat_Until -> . REPEAT LBRACE Body RBRACE UNTIL Comparison END
+    (61) For_Do -> . FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+    (62) Output -> . OUTPUT TEXT
+    (63) Output -> . OUTPUT ID
+    (64) Output -> . OUTPUT Num
+    (65) Output -> . OUTPUT LBRACKET List RBRACKET
+    (66) Output -> . OUTPUT LBRACKET Matrix RBRACKET
+
+    ID              shift and go to state 8
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    REPEAT          shift and go to state 18
+    FOR             shift and go to state 19
+    OUTPUT          shift and go to state 20
+
+    Body                           shift and go to state 64
+    Assignment                     shift and go to state 5
+    Statement                      shift and go to state 6
+    If                             shift and go to state 11
+    While_Do                       shift and go to state 12
+    Repeat_Until                   shift and go to state 13
+    For_Do                         shift and go to state 14
+    Output                         shift and go to state 15
+
+state 37
+
+    (61) For_Do -> FOR LPAREN . Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+    (21) Assignment -> . ID KEEPS Expression
+    (22) Assignment -> . ID KEEPS LBRACKET List RBRACKET
+    (23) Assignment -> . ID LPAREN Expression RPAREN KEEPS Expression
+    (24) Assignment -> . ID KEEPS LBRACKET Matrix RBRACKET
+    (25) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> . ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET
+    (27) Assignment -> . ID PLUS PLUS
+    (28) Assignment -> . ID MINUS MINUS
+    (29) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+
+    ID              shift and go to state 8
+
+    Assignment                     shift and go to state 65
+
+state 38
+
+    (62) Output -> OUTPUT TEXT .
+
+    ID              reduce using rule 62 (Output -> OUTPUT TEXT .)
+    IF              reduce using rule 62 (Output -> OUTPUT TEXT .)
+    WHILE           reduce using rule 62 (Output -> OUTPUT TEXT .)
+    REPEAT          reduce using rule 62 (Output -> OUTPUT TEXT .)
+    FOR             reduce using rule 62 (Output -> OUTPUT TEXT .)
+    OUTPUT          reduce using rule 62 (Output -> OUTPUT TEXT .)
+    $end            reduce using rule 62 (Output -> OUTPUT TEXT .)
+    RBRACE          reduce using rule 62 (Output -> OUTPUT TEXT .)
+
+
+state 39
+
+    (63) Output -> OUTPUT ID .
+
+    ID              reduce using rule 63 (Output -> OUTPUT ID .)
+    IF              reduce using rule 63 (Output -> OUTPUT ID .)
+    WHILE           reduce using rule 63 (Output -> OUTPUT ID .)
+    REPEAT          reduce using rule 63 (Output -> OUTPUT ID .)
+    FOR             reduce using rule 63 (Output -> OUTPUT ID .)
+    OUTPUT          reduce using rule 63 (Output -> OUTPUT ID .)
+    $end            reduce using rule 63 (Output -> OUTPUT ID .)
+    RBRACE          reduce using rule 63 (Output -> OUTPUT ID .)
+
+
+state 40
+
+    (64) Output -> OUTPUT Num .
+
+    ID              reduce using rule 64 (Output -> OUTPUT Num .)
+    IF              reduce using rule 64 (Output -> OUTPUT Num .)
+    WHILE           reduce using rule 64 (Output -> OUTPUT Num .)
+    REPEAT          reduce using rule 64 (Output -> OUTPUT Num .)
+    FOR             reduce using rule 64 (Output -> OUTPUT Num .)
+    OUTPUT          reduce using rule 64 (Output -> OUTPUT Num .)
+    $end            reduce using rule 64 (Output -> OUTPUT Num .)
+    RBRACE          reduce using rule 64 (Output -> OUTPUT Num .)
+
+
+state 41
+
+    (65) Output -> OUTPUT LBRACKET . List RBRACKET
+    (66) Output -> OUTPUT LBRACKET . Matrix RBRACKET
+    (33) List -> . Num COMMA List
+    (34) List -> . Num
+    (35) List -> .
+    (36) Matrix -> . LBRACKET List RBRACKET COMMA Matrix
+    (37) Matrix -> . LBRACKET List RBRACKET
+    (38) Matrix -> .
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+
+  ! reduce/reduce conflict for RBRACKET resolved using rule 35 (List -> .)
+    RBRACKET        reduce using rule 35 (List -> .)
+    LBRACKET        shift and go to state 66
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+  ! RBRACKET        [ reduce using rule 38 (Matrix -> .) ]
+
+    List                           shift and go to state 67
+    Matrix                         shift and go to state 68
+    Num                            shift and go to state 69
+
+state 42
+
+    (39) Num -> NUM .
+
+    ID              reduce using rule 39 (Num -> NUM .)
+    IF              reduce using rule 39 (Num -> NUM .)
+    WHILE           reduce using rule 39 (Num -> NUM .)
+    REPEAT          reduce using rule 39 (Num -> NUM .)
+    FOR             reduce using rule 39 (Num -> NUM .)
+    OUTPUT          reduce using rule 39 (Num -> NUM .)
+    $end            reduce using rule 39 (Num -> NUM .)
+    RBRACE          reduce using rule 39 (Num -> NUM .)
+    PLUS            reduce using rule 39 (Num -> NUM .)
+    MINUS           reduce using rule 39 (Num -> NUM .)
+    TIMES           reduce using rule 39 (Num -> NUM .)
+    DIVIDED_BY      reduce using rule 39 (Num -> NUM .)
+    REMAINDER       reduce using rule 39 (Num -> NUM .)
+    SEMICOLON       reduce using rule 39 (Num -> NUM .)
+    RPAREN          reduce using rule 39 (Num -> NUM .)
+    COMMA           reduce using rule 39 (Num -> NUM .)
+    EQUAL           reduce using rule 39 (Num -> NUM .)
+    NOT_EQUAL       reduce using rule 39 (Num -> NUM .)
+    GREATER         reduce using rule 39 (Num -> NUM .)
+    GREATER_EQUAL   reduce using rule 39 (Num -> NUM .)
+    LOWER           reduce using rule 39 (Num -> NUM .)
+    LOWER_EQUAL     reduce using rule 39 (Num -> NUM .)
+    RBRACKET        reduce using rule 39 (Num -> NUM .)
+    INT             reduce using rule 39 (Num -> NUM .)
+    ARRAY           reduce using rule 39 (Num -> NUM .)
+    MATRIX          reduce using rule 39 (Num -> NUM .)
+
+
+state 43
+
+    (40) Num -> NEGATIVE . NUM
+
+    NUM             shift and go to state 70
+
+
+state 44
+
+    (11) Declaration -> INT ID KEEPS . Expression
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 71
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 45
+
+    (42) Expression -> ID .
+
+    PLUS            reduce using rule 42 (Expression -> ID .)
+    MINUS           reduce using rule 42 (Expression -> ID .)
+    TIMES           reduce using rule 42 (Expression -> ID .)
+    DIVIDED_BY      reduce using rule 42 (Expression -> ID .)
+    REMAINDER       reduce using rule 42 (Expression -> ID .)
+    ID              reduce using rule 42 (Expression -> ID .)
+    IF              reduce using rule 42 (Expression -> ID .)
+    WHILE           reduce using rule 42 (Expression -> ID .)
+    REPEAT          reduce using rule 42 (Expression -> ID .)
+    FOR             reduce using rule 42 (Expression -> ID .)
+    OUTPUT          reduce using rule 42 (Expression -> ID .)
+    $end            reduce using rule 42 (Expression -> ID .)
+    RBRACE          reduce using rule 42 (Expression -> ID .)
+    SEMICOLON       reduce using rule 42 (Expression -> ID .)
+    RPAREN          reduce using rule 42 (Expression -> ID .)
+    COMMA           reduce using rule 42 (Expression -> ID .)
+    EQUAL           reduce using rule 42 (Expression -> ID .)
+    NOT_EQUAL       reduce using rule 42 (Expression -> ID .)
+    GREATER         reduce using rule 42 (Expression -> ID .)
+    GREATER_EQUAL   reduce using rule 42 (Expression -> ID .)
+    LOWER           reduce using rule 42 (Expression -> ID .)
+    LOWER_EQUAL     reduce using rule 42 (Expression -> ID .)
+    INT             reduce using rule 42 (Expression -> ID .)
+    ARRAY           reduce using rule 42 (Expression -> ID .)
+    MATRIX          reduce using rule 42 (Expression -> ID .)
+
+
+state 46
+
+    (21) Assignment -> ID KEEPS Expression .
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    ID              reduce using rule 21 (Assignment -> ID KEEPS Expression .)
+    IF              reduce using rule 21 (Assignment -> ID KEEPS Expression .)
+    WHILE           reduce using rule 21 (Assignment -> ID KEEPS Expression .)
+    REPEAT          reduce using rule 21 (Assignment -> ID KEEPS Expression .)
+    FOR             reduce using rule 21 (Assignment -> ID KEEPS Expression .)
+    OUTPUT          reduce using rule 21 (Assignment -> ID KEEPS Expression .)
+    $end            reduce using rule 21 (Assignment -> ID KEEPS Expression .)
+    RBRACE          reduce using rule 21 (Assignment -> ID KEEPS Expression .)
+    SEMICOLON       reduce using rule 21 (Assignment -> ID KEEPS Expression .)
+    RPAREN          reduce using rule 21 (Assignment -> ID KEEPS Expression .)
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 47
+
+    (22) Assignment -> ID KEEPS LBRACKET . List RBRACKET
+    (24) Assignment -> ID KEEPS LBRACKET . Matrix RBRACKET
+    (33) List -> . Num COMMA List
+    (34) List -> . Num
+    (35) List -> .
+    (36) Matrix -> . LBRACKET List RBRACKET COMMA Matrix
+    (37) Matrix -> . LBRACKET List RBRACKET
+    (38) Matrix -> .
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+
+  ! reduce/reduce conflict for RBRACKET resolved using rule 35 (List -> .)
+    RBRACKET        reduce using rule 35 (List -> .)
+    LBRACKET        shift and go to state 66
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+  ! RBRACKET        [ reduce using rule 38 (Matrix -> .) ]
+
+    List                           shift and go to state 77
+    Matrix                         shift and go to state 78
+    Num                            shift and go to state 69
+
+state 48
+
+    (41) Expression -> Num .
+
+    PLUS            reduce using rule 41 (Expression -> Num .)
+    MINUS           reduce using rule 41 (Expression -> Num .)
+    TIMES           reduce using rule 41 (Expression -> Num .)
+    DIVIDED_BY      reduce using rule 41 (Expression -> Num .)
+    REMAINDER       reduce using rule 41 (Expression -> Num .)
+    ID              reduce using rule 41 (Expression -> Num .)
+    IF              reduce using rule 41 (Expression -> Num .)
+    WHILE           reduce using rule 41 (Expression -> Num .)
+    REPEAT          reduce using rule 41 (Expression -> Num .)
+    FOR             reduce using rule 41 (Expression -> Num .)
+    OUTPUT          reduce using rule 41 (Expression -> Num .)
+    $end            reduce using rule 41 (Expression -> Num .)
+    RBRACE          reduce using rule 41 (Expression -> Num .)
+    SEMICOLON       reduce using rule 41 (Expression -> Num .)
+    RPAREN          reduce using rule 41 (Expression -> Num .)
+    COMMA           reduce using rule 41 (Expression -> Num .)
+    EQUAL           reduce using rule 41 (Expression -> Num .)
+    NOT_EQUAL       reduce using rule 41 (Expression -> Num .)
+    GREATER         reduce using rule 41 (Expression -> Num .)
+    GREATER_EQUAL   reduce using rule 41 (Expression -> Num .)
+    LOWER           reduce using rule 41 (Expression -> Num .)
+    LOWER_EQUAL     reduce using rule 41 (Expression -> Num .)
+    INT             reduce using rule 41 (Expression -> Num .)
+    ARRAY           reduce using rule 41 (Expression -> Num .)
+    MATRIX          reduce using rule 41 (Expression -> Num .)
+
+
+state 49
+
+    (43) Expression -> INPUT .
+
+    PLUS            reduce using rule 43 (Expression -> INPUT .)
+    MINUS           reduce using rule 43 (Expression -> INPUT .)
+    TIMES           reduce using rule 43 (Expression -> INPUT .)
+    DIVIDED_BY      reduce using rule 43 (Expression -> INPUT .)
+    REMAINDER       reduce using rule 43 (Expression -> INPUT .)
+    ID              reduce using rule 43 (Expression -> INPUT .)
+    IF              reduce using rule 43 (Expression -> INPUT .)
+    WHILE           reduce using rule 43 (Expression -> INPUT .)
+    REPEAT          reduce using rule 43 (Expression -> INPUT .)
+    FOR             reduce using rule 43 (Expression -> INPUT .)
+    OUTPUT          reduce using rule 43 (Expression -> INPUT .)
+    $end            reduce using rule 43 (Expression -> INPUT .)
+    RBRACE          reduce using rule 43 (Expression -> INPUT .)
+    SEMICOLON       reduce using rule 43 (Expression -> INPUT .)
+    RPAREN          reduce using rule 43 (Expression -> INPUT .)
+    COMMA           reduce using rule 43 (Expression -> INPUT .)
+    EQUAL           reduce using rule 43 (Expression -> INPUT .)
+    NOT_EQUAL       reduce using rule 43 (Expression -> INPUT .)
+    GREATER         reduce using rule 43 (Expression -> INPUT .)
+    GREATER_EQUAL   reduce using rule 43 (Expression -> INPUT .)
+    LOWER           reduce using rule 43 (Expression -> INPUT .)
+    LOWER_EQUAL     reduce using rule 43 (Expression -> INPUT .)
+    INT             reduce using rule 43 (Expression -> INPUT .)
+    ARRAY           reduce using rule 43 (Expression -> INPUT .)
+    MATRIX          reduce using rule 43 (Expression -> INPUT .)
+
+
+state 50
+
+    (44) Expression -> Operation .
+
+    PLUS            reduce using rule 44 (Expression -> Operation .)
+    MINUS           reduce using rule 44 (Expression -> Operation .)
+    TIMES           reduce using rule 44 (Expression -> Operation .)
+    DIVIDED_BY      reduce using rule 44 (Expression -> Operation .)
+    REMAINDER       reduce using rule 44 (Expression -> Operation .)
+    ID              reduce using rule 44 (Expression -> Operation .)
+    IF              reduce using rule 44 (Expression -> Operation .)
+    WHILE           reduce using rule 44 (Expression -> Operation .)
+    REPEAT          reduce using rule 44 (Expression -> Operation .)
+    FOR             reduce using rule 44 (Expression -> Operation .)
+    OUTPUT          reduce using rule 44 (Expression -> Operation .)
+    $end            reduce using rule 44 (Expression -> Operation .)
+    RBRACE          reduce using rule 44 (Expression -> Operation .)
+    SEMICOLON       reduce using rule 44 (Expression -> Operation .)
+    RPAREN          reduce using rule 44 (Expression -> Operation .)
+    COMMA           reduce using rule 44 (Expression -> Operation .)
+    EQUAL           reduce using rule 44 (Expression -> Operation .)
+    NOT_EQUAL       reduce using rule 44 (Expression -> Operation .)
+    GREATER         reduce using rule 44 (Expression -> Operation .)
+    GREATER_EQUAL   reduce using rule 44 (Expression -> Operation .)
+    LOWER           reduce using rule 44 (Expression -> Operation .)
+    LOWER_EQUAL     reduce using rule 44 (Expression -> Operation .)
+    INT             reduce using rule 44 (Expression -> Operation .)
+    ARRAY           reduce using rule 44 (Expression -> Operation .)
+    MATRIX          reduce using rule 44 (Expression -> Operation .)
+
+
+state 51
+
+    (45) Expression -> SEARCH . ID LPAREN Expression RPAREN
+    (46) Expression -> SEARCH . ID LPAREN Expression COMMA Expression RPAREN
+
+    ID              shift and go to state 79
+
+
+state 52
+
+    (23) Assignment -> ID LPAREN Expression . RPAREN KEEPS Expression
+    (25) Assignment -> ID LPAREN Expression . COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> ID LPAREN Expression . RPAREN KEEPS LBRACKET List RBRACKET
+    (29) Assignment -> ID LPAREN Expression . RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> ID LPAREN Expression . COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> ID LPAREN Expression . RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> ID LPAREN Expression . COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 80
+    COMMA           shift and go to state 81
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 53
+
+    (27) Assignment -> ID PLUS PLUS .
+
+    ID              reduce using rule 27 (Assignment -> ID PLUS PLUS .)
+    IF              reduce using rule 27 (Assignment -> ID PLUS PLUS .)
+    WHILE           reduce using rule 27 (Assignment -> ID PLUS PLUS .)
+    REPEAT          reduce using rule 27 (Assignment -> ID PLUS PLUS .)
+    FOR             reduce using rule 27 (Assignment -> ID PLUS PLUS .)
+    OUTPUT          reduce using rule 27 (Assignment -> ID PLUS PLUS .)
+    $end            reduce using rule 27 (Assignment -> ID PLUS PLUS .)
+    RBRACE          reduce using rule 27 (Assignment -> ID PLUS PLUS .)
+    SEMICOLON       reduce using rule 27 (Assignment -> ID PLUS PLUS .)
+    RPAREN          reduce using rule 27 (Assignment -> ID PLUS PLUS .)
+
+
+state 54
+
+    (28) Assignment -> ID MINUS MINUS .
+
+    ID              reduce using rule 28 (Assignment -> ID MINUS MINUS .)
+    IF              reduce using rule 28 (Assignment -> ID MINUS MINUS .)
+    WHILE           reduce using rule 28 (Assignment -> ID MINUS MINUS .)
+    REPEAT          reduce using rule 28 (Assignment -> ID MINUS MINUS .)
+    FOR             reduce using rule 28 (Assignment -> ID MINUS MINUS .)
+    OUTPUT          reduce using rule 28 (Assignment -> ID MINUS MINUS .)
+    $end            reduce using rule 28 (Assignment -> ID MINUS MINUS .)
+    RBRACE          reduce using rule 28 (Assignment -> ID MINUS MINUS .)
+    SEMICOLON       reduce using rule 28 (Assignment -> ID MINUS MINUS .)
+    RPAREN          reduce using rule 28 (Assignment -> ID MINUS MINUS .)
+
+
+state 55
+
+    (13) Declaration -> ARRAY ID LPAREN . Num RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Num                            shift and go to state 82
+
+state 56
+
+    (14) Declaration -> ARRAY ID KEEPS . LBRACKET List RBRACKET
+    (15) Declaration -> ARRAY ID KEEPS . ID
+    (16) Declaration -> ARRAY ID KEEPS . SEARCH ID LPAREN Expression RPAREN
+
+    LBRACKET        shift and go to state 84
+    ID              shift and go to state 83
+    SEARCH          shift and go to state 85
+
+
+state 57
+
+    (18) Declaration -> MATRIX ID LPAREN . Num COMMA Num RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Num                            shift and go to state 86
+
+state 58
+
+    (19) Declaration -> MATRIX ID KEEPS . LBRACKET Matrix RBRACKET
+    (20) Declaration -> MATRIX ID KEEPS . ID
+
+    LBRACKET        shift and go to state 88
+    ID              shift and go to state 87
+
+
+state 59
+
+    (57) If -> IF Comparison LBRACE . Body RBRACE END
+    (58) If -> IF Comparison LBRACE . Body RBRACE ELSE LBRACE Body RBRACE END
+    (6) Body -> . Assignment Body
+    (7) Body -> . Statement Body
+    (8) Body -> . Assignment
+    (9) Body -> . Statement
+    (21) Assignment -> . ID KEEPS Expression
+    (22) Assignment -> . ID KEEPS LBRACKET List RBRACKET
+    (23) Assignment -> . ID LPAREN Expression RPAREN KEEPS Expression
+    (24) Assignment -> . ID KEEPS LBRACKET Matrix RBRACKET
+    (25) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> . ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET
+    (27) Assignment -> . ID PLUS PLUS
+    (28) Assignment -> . ID MINUS MINUS
+    (29) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (52) Statement -> . If
+    (53) Statement -> . While_Do
+    (54) Statement -> . Repeat_Until
+    (55) Statement -> . For_Do
+    (56) Statement -> . Output
+    (57) If -> . IF Comparison LBRACE Body RBRACE END
+    (58) If -> . IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END
+    (59) While_Do -> . WHILE Comparison DO LBRACE Body RBRACE END
+    (60) Repeat_Until -> . REPEAT LBRACE Body RBRACE UNTIL Comparison END
+    (61) For_Do -> . FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+    (62) Output -> . OUTPUT TEXT
+    (63) Output -> . OUTPUT ID
+    (64) Output -> . OUTPUT Num
+    (65) Output -> . OUTPUT LBRACKET List RBRACKET
+    (66) Output -> . OUTPUT LBRACKET Matrix RBRACKET
+
+    ID              shift and go to state 8
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    REPEAT          shift and go to state 18
+    FOR             shift and go to state 19
+    OUTPUT          shift and go to state 20
+
+    Body                           shift and go to state 89
+    Assignment                     shift and go to state 5
+    Statement                      shift and go to state 6
+    If                             shift and go to state 11
+    While_Do                       shift and go to state 12
+    Repeat_Until                   shift and go to state 13
+    For_Do                         shift and go to state 14
+    Output                         shift and go to state 15
+
+state 60
+
+    (67) Comparison -> NOT Comparison .
+
+    LBRACE          reduce using rule 67 (Comparison -> NOT Comparison .)
+    DO              reduce using rule 67 (Comparison -> NOT Comparison .)
+    AND             reduce using rule 67 (Comparison -> NOT Comparison .)
+    OR              reduce using rule 67 (Comparison -> NOT Comparison .)
+    RPAREN          reduce using rule 67 (Comparison -> NOT Comparison .)
+    SEMICOLON       reduce using rule 67 (Comparison -> NOT Comparison .)
+    END             reduce using rule 67 (Comparison -> NOT Comparison .)
+
+
+state 61
+
+    (68) Comparison -> LPAREN Expression . EQUAL Expression RPAREN
+    (69) Comparison -> LPAREN Expression . NOT_EQUAL Expression RPAREN
+    (70) Comparison -> LPAREN Expression . GREATER Expression RPAREN
+    (71) Comparison -> LPAREN Expression . GREATER_EQUAL Expression RPAREN
+    (72) Comparison -> LPAREN Expression . LOWER Expression RPAREN
+    (73) Comparison -> LPAREN Expression . LOWER_EQUAL Expression RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    EQUAL           shift and go to state 90
+    NOT_EQUAL       shift and go to state 91
+    GREATER         shift and go to state 92
+    GREATER_EQUAL   shift and go to state 93
+    LOWER           shift and go to state 94
+    LOWER_EQUAL     shift and go to state 95
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 62
+
+    (74) Comparison -> LPAREN Comparison . AND Comparison RPAREN
+    (75) Comparison -> LPAREN Comparison . OR Comparison RPAREN
+
+    AND             shift and go to state 96
+    OR              shift and go to state 97
+
+
+state 63
+
+    (59) While_Do -> WHILE Comparison DO . LBRACE Body RBRACE END
+
+    LBRACE          shift and go to state 98
+
+
+state 64
+
+    (60) Repeat_Until -> REPEAT LBRACE Body . RBRACE UNTIL Comparison END
+
+    RBRACE          shift and go to state 99
+
+
+state 65
+
+    (61) For_Do -> FOR LPAREN Assignment . SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+
+    SEMICOLON       shift and go to state 100
+
+
+state 66
+
+    (36) Matrix -> LBRACKET . List RBRACKET COMMA Matrix
+    (37) Matrix -> LBRACKET . List RBRACKET
+    (33) List -> . Num COMMA List
+    (34) List -> . Num
+    (35) List -> .
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+
+    RBRACKET        reduce using rule 35 (List -> .)
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    List                           shift and go to state 101
+    Num                            shift and go to state 69
+
+state 67
+
+    (65) Output -> OUTPUT LBRACKET List . RBRACKET
+
+    RBRACKET        shift and go to state 102
+
+
+state 68
+
+    (66) Output -> OUTPUT LBRACKET Matrix . RBRACKET
+
+    RBRACKET        shift and go to state 103
+
+
+state 69
+
+    (33) List -> Num . COMMA List
+    (34) List -> Num .
+
+    COMMA           shift and go to state 104
+    RBRACKET        reduce using rule 34 (List -> Num .)
+
+
+state 70
+
+    (40) Num -> NEGATIVE NUM .
+
+    ID              reduce using rule 40 (Num -> NEGATIVE NUM .)
+    IF              reduce using rule 40 (Num -> NEGATIVE NUM .)
+    WHILE           reduce using rule 40 (Num -> NEGATIVE NUM .)
+    REPEAT          reduce using rule 40 (Num -> NEGATIVE NUM .)
+    FOR             reduce using rule 40 (Num -> NEGATIVE NUM .)
+    OUTPUT          reduce using rule 40 (Num -> NEGATIVE NUM .)
+    $end            reduce using rule 40 (Num -> NEGATIVE NUM .)
+    RBRACE          reduce using rule 40 (Num -> NEGATIVE NUM .)
+    PLUS            reduce using rule 40 (Num -> NEGATIVE NUM .)
+    MINUS           reduce using rule 40 (Num -> NEGATIVE NUM .)
+    TIMES           reduce using rule 40 (Num -> NEGATIVE NUM .)
+    DIVIDED_BY      reduce using rule 40 (Num -> NEGATIVE NUM .)
+    REMAINDER       reduce using rule 40 (Num -> NEGATIVE NUM .)
+    SEMICOLON       reduce using rule 40 (Num -> NEGATIVE NUM .)
+    RPAREN          reduce using rule 40 (Num -> NEGATIVE NUM .)
+    COMMA           reduce using rule 40 (Num -> NEGATIVE NUM .)
+    EQUAL           reduce using rule 40 (Num -> NEGATIVE NUM .)
+    NOT_EQUAL       reduce using rule 40 (Num -> NEGATIVE NUM .)
+    GREATER         reduce using rule 40 (Num -> NEGATIVE NUM .)
+    GREATER_EQUAL   reduce using rule 40 (Num -> NEGATIVE NUM .)
+    LOWER           reduce using rule 40 (Num -> NEGATIVE NUM .)
+    LOWER_EQUAL     reduce using rule 40 (Num -> NEGATIVE NUM .)
+    RBRACKET        reduce using rule 40 (Num -> NEGATIVE NUM .)
+    INT             reduce using rule 40 (Num -> NEGATIVE NUM .)
+    ARRAY           reduce using rule 40 (Num -> NEGATIVE NUM .)
+    MATRIX          reduce using rule 40 (Num -> NEGATIVE NUM .)
+
+
+state 71
+
+    (11) Declaration -> INT ID KEEPS Expression .
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    INT             reduce using rule 11 (Declaration -> INT ID KEEPS Expression .)
+    ARRAY           reduce using rule 11 (Declaration -> INT ID KEEPS Expression .)
+    MATRIX          reduce using rule 11 (Declaration -> INT ID KEEPS Expression .)
+    ID              reduce using rule 11 (Declaration -> INT ID KEEPS Expression .)
+    IF              reduce using rule 11 (Declaration -> INT ID KEEPS Expression .)
+    WHILE           reduce using rule 11 (Declaration -> INT ID KEEPS Expression .)
+    REPEAT          reduce using rule 11 (Declaration -> INT ID KEEPS Expression .)
+    FOR             reduce using rule 11 (Declaration -> INT ID KEEPS Expression .)
+    OUTPUT          reduce using rule 11 (Declaration -> INT ID KEEPS Expression .)
+    $end            reduce using rule 11 (Declaration -> INT ID KEEPS Expression .)
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 72
+
+    (47) Operation -> Expression PLUS . Expression
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 105
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 73
+
+    (48) Operation -> Expression MINUS . Expression
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 106
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 74
+
+    (49) Operation -> Expression TIMES . Expression
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 107
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 75
+
+    (50) Operation -> Expression DIVIDED_BY . Expression
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 108
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 76
+
+    (51) Operation -> Expression REMAINDER . Expression
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 109
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 77
+
+    (22) Assignment -> ID KEEPS LBRACKET List . RBRACKET
+
+    RBRACKET        shift and go to state 110
+
+
+state 78
+
+    (24) Assignment -> ID KEEPS LBRACKET Matrix . RBRACKET
+
+    RBRACKET        shift and go to state 111
+
+
+state 79
+
+    (45) Expression -> SEARCH ID . LPAREN Expression RPAREN
+    (46) Expression -> SEARCH ID . LPAREN Expression COMMA Expression RPAREN
+
+    LPAREN          shift and go to state 112
+
+
+state 80
+
+    (23) Assignment -> ID LPAREN Expression RPAREN . KEEPS Expression
+    (26) Assignment -> ID LPAREN Expression RPAREN . KEEPS LBRACKET List RBRACKET
+    (29) Assignment -> ID LPAREN Expression RPAREN . SWAP ID LPAREN Expression RPAREN
+    (31) Assignment -> ID LPAREN Expression RPAREN . SWAP ID LPAREN Expression COMMA Expression RPAREN
+
+    KEEPS           shift and go to state 113
+    SWAP            shift and go to state 114
+
+
+state 81
+
+    (25) Assignment -> ID LPAREN Expression COMMA . Expression RPAREN KEEPS Expression
+    (30) Assignment -> ID LPAREN Expression COMMA . Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> ID LPAREN Expression COMMA . Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 115
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 82
+
+    (13) Declaration -> ARRAY ID LPAREN Num . RPAREN
+
+    RPAREN          shift and go to state 116
+
+
+state 83
+
+    (15) Declaration -> ARRAY ID KEEPS ID .
+
+    INT             reduce using rule 15 (Declaration -> ARRAY ID KEEPS ID .)
+    ARRAY           reduce using rule 15 (Declaration -> ARRAY ID KEEPS ID .)
+    MATRIX          reduce using rule 15 (Declaration -> ARRAY ID KEEPS ID .)
+    ID              reduce using rule 15 (Declaration -> ARRAY ID KEEPS ID .)
+    IF              reduce using rule 15 (Declaration -> ARRAY ID KEEPS ID .)
+    WHILE           reduce using rule 15 (Declaration -> ARRAY ID KEEPS ID .)
+    REPEAT          reduce using rule 15 (Declaration -> ARRAY ID KEEPS ID .)
+    FOR             reduce using rule 15 (Declaration -> ARRAY ID KEEPS ID .)
+    OUTPUT          reduce using rule 15 (Declaration -> ARRAY ID KEEPS ID .)
+    $end            reduce using rule 15 (Declaration -> ARRAY ID KEEPS ID .)
+
+
+state 84
+
+    (14) Declaration -> ARRAY ID KEEPS LBRACKET . List RBRACKET
+    (33) List -> . Num COMMA List
+    (34) List -> . Num
+    (35) List -> .
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+
+    RBRACKET        reduce using rule 35 (List -> .)
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    List                           shift and go to state 117
+    Num                            shift and go to state 69
+
+state 85
+
+    (16) Declaration -> ARRAY ID KEEPS SEARCH . ID LPAREN Expression RPAREN
+
+    ID              shift and go to state 118
+
+
+state 86
+
+    (18) Declaration -> MATRIX ID LPAREN Num . COMMA Num RPAREN
+
+    COMMA           shift and go to state 119
+
+
+state 87
+
+    (20) Declaration -> MATRIX ID KEEPS ID .
+
+    INT             reduce using rule 20 (Declaration -> MATRIX ID KEEPS ID .)
+    ARRAY           reduce using rule 20 (Declaration -> MATRIX ID KEEPS ID .)
+    MATRIX          reduce using rule 20 (Declaration -> MATRIX ID KEEPS ID .)
+    ID              reduce using rule 20 (Declaration -> MATRIX ID KEEPS ID .)
+    IF              reduce using rule 20 (Declaration -> MATRIX ID KEEPS ID .)
+    WHILE           reduce using rule 20 (Declaration -> MATRIX ID KEEPS ID .)
+    REPEAT          reduce using rule 20 (Declaration -> MATRIX ID KEEPS ID .)
+    FOR             reduce using rule 20 (Declaration -> MATRIX ID KEEPS ID .)
+    OUTPUT          reduce using rule 20 (Declaration -> MATRIX ID KEEPS ID .)
+    $end            reduce using rule 20 (Declaration -> MATRIX ID KEEPS ID .)
+
+
+state 88
+
+    (19) Declaration -> MATRIX ID KEEPS LBRACKET . Matrix RBRACKET
+    (36) Matrix -> . LBRACKET List RBRACKET COMMA Matrix
+    (37) Matrix -> . LBRACKET List RBRACKET
+    (38) Matrix -> .
+
+    LBRACKET        shift and go to state 66
+    RBRACKET        reduce using rule 38 (Matrix -> .)
+
+    Matrix                         shift and go to state 120
+
+state 89
+
+    (57) If -> IF Comparison LBRACE Body . RBRACE END
+    (58) If -> IF Comparison LBRACE Body . RBRACE ELSE LBRACE Body RBRACE END
+
+    RBRACE          shift and go to state 121
+
+
+state 90
+
+    (68) Comparison -> LPAREN Expression EQUAL . Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 122
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 91
+
+    (69) Comparison -> LPAREN Expression NOT_EQUAL . Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 123
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 92
+
+    (70) Comparison -> LPAREN Expression GREATER . Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 124
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 93
+
+    (71) Comparison -> LPAREN Expression GREATER_EQUAL . Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 125
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 94
+
+    (72) Comparison -> LPAREN Expression LOWER . Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 126
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 95
+
+    (73) Comparison -> LPAREN Expression LOWER_EQUAL . Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 127
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 96
+
+    (74) Comparison -> LPAREN Comparison AND . Comparison RPAREN
+    (67) Comparison -> . NOT Comparison
+    (68) Comparison -> . LPAREN Expression EQUAL Expression RPAREN
+    (69) Comparison -> . LPAREN Expression NOT_EQUAL Expression RPAREN
+    (70) Comparison -> . LPAREN Expression GREATER Expression RPAREN
+    (71) Comparison -> . LPAREN Expression GREATER_EQUAL Expression RPAREN
+    (72) Comparison -> . LPAREN Expression LOWER Expression RPAREN
+    (73) Comparison -> . LPAREN Expression LOWER_EQUAL Expression RPAREN
+    (74) Comparison -> . LPAREN Comparison AND Comparison RPAREN
+    (75) Comparison -> . LPAREN Comparison OR Comparison RPAREN
+
+    NOT             shift and go to state 33
+    LPAREN          shift and go to state 34
+
+    Comparison                     shift and go to state 128
+
+state 97
+
+    (75) Comparison -> LPAREN Comparison OR . Comparison RPAREN
+    (67) Comparison -> . NOT Comparison
+    (68) Comparison -> . LPAREN Expression EQUAL Expression RPAREN
+    (69) Comparison -> . LPAREN Expression NOT_EQUAL Expression RPAREN
+    (70) Comparison -> . LPAREN Expression GREATER Expression RPAREN
+    (71) Comparison -> . LPAREN Expression GREATER_EQUAL Expression RPAREN
+    (72) Comparison -> . LPAREN Expression LOWER Expression RPAREN
+    (73) Comparison -> . LPAREN Expression LOWER_EQUAL Expression RPAREN
+    (74) Comparison -> . LPAREN Comparison AND Comparison RPAREN
+    (75) Comparison -> . LPAREN Comparison OR Comparison RPAREN
+
+    NOT             shift and go to state 33
+    LPAREN          shift and go to state 34
+
+    Comparison                     shift and go to state 129
+
+state 98
+
+    (59) While_Do -> WHILE Comparison DO LBRACE . Body RBRACE END
+    (6) Body -> . Assignment Body
+    (7) Body -> . Statement Body
+    (8) Body -> . Assignment
+    (9) Body -> . Statement
+    (21) Assignment -> . ID KEEPS Expression
+    (22) Assignment -> . ID KEEPS LBRACKET List RBRACKET
+    (23) Assignment -> . ID LPAREN Expression RPAREN KEEPS Expression
+    (24) Assignment -> . ID KEEPS LBRACKET Matrix RBRACKET
+    (25) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> . ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET
+    (27) Assignment -> . ID PLUS PLUS
+    (28) Assignment -> . ID MINUS MINUS
+    (29) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (52) Statement -> . If
+    (53) Statement -> . While_Do
+    (54) Statement -> . Repeat_Until
+    (55) Statement -> . For_Do
+    (56) Statement -> . Output
+    (57) If -> . IF Comparison LBRACE Body RBRACE END
+    (58) If -> . IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END
+    (59) While_Do -> . WHILE Comparison DO LBRACE Body RBRACE END
+    (60) Repeat_Until -> . REPEAT LBRACE Body RBRACE UNTIL Comparison END
+    (61) For_Do -> . FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+    (62) Output -> . OUTPUT TEXT
+    (63) Output -> . OUTPUT ID
+    (64) Output -> . OUTPUT Num
+    (65) Output -> . OUTPUT LBRACKET List RBRACKET
+    (66) Output -> . OUTPUT LBRACKET Matrix RBRACKET
+
+    ID              shift and go to state 8
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    REPEAT          shift and go to state 18
+    FOR             shift and go to state 19
+    OUTPUT          shift and go to state 20
+
+    Body                           shift and go to state 130
+    Assignment                     shift and go to state 5
+    Statement                      shift and go to state 6
+    If                             shift and go to state 11
+    While_Do                       shift and go to state 12
+    Repeat_Until                   shift and go to state 13
+    For_Do                         shift and go to state 14
+    Output                         shift and go to state 15
+
+state 99
+
+    (60) Repeat_Until -> REPEAT LBRACE Body RBRACE . UNTIL Comparison END
+
+    UNTIL           shift and go to state 131
+
+
+state 100
+
+    (61) For_Do -> FOR LPAREN Assignment SEMICOLON . Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+    (67) Comparison -> . NOT Comparison
+    (68) Comparison -> . LPAREN Expression EQUAL Expression RPAREN
+    (69) Comparison -> . LPAREN Expression NOT_EQUAL Expression RPAREN
+    (70) Comparison -> . LPAREN Expression GREATER Expression RPAREN
+    (71) Comparison -> . LPAREN Expression GREATER_EQUAL Expression RPAREN
+    (72) Comparison -> . LPAREN Expression LOWER Expression RPAREN
+    (73) Comparison -> . LPAREN Expression LOWER_EQUAL Expression RPAREN
+    (74) Comparison -> . LPAREN Comparison AND Comparison RPAREN
+    (75) Comparison -> . LPAREN Comparison OR Comparison RPAREN
+
+    NOT             shift and go to state 33
+    LPAREN          shift and go to state 34
+
+    Comparison                     shift and go to state 132
+
+state 101
+
+    (36) Matrix -> LBRACKET List . RBRACKET COMMA Matrix
+    (37) Matrix -> LBRACKET List . RBRACKET
+
+    RBRACKET        shift and go to state 133
+
+
+state 102
+
+    (65) Output -> OUTPUT LBRACKET List RBRACKET .
+
+    ID              reduce using rule 65 (Output -> OUTPUT LBRACKET List RBRACKET .)
+    IF              reduce using rule 65 (Output -> OUTPUT LBRACKET List RBRACKET .)
+    WHILE           reduce using rule 65 (Output -> OUTPUT LBRACKET List RBRACKET .)
+    REPEAT          reduce using rule 65 (Output -> OUTPUT LBRACKET List RBRACKET .)
+    FOR             reduce using rule 65 (Output -> OUTPUT LBRACKET List RBRACKET .)
+    OUTPUT          reduce using rule 65 (Output -> OUTPUT LBRACKET List RBRACKET .)
+    $end            reduce using rule 65 (Output -> OUTPUT LBRACKET List RBRACKET .)
+    RBRACE          reduce using rule 65 (Output -> OUTPUT LBRACKET List RBRACKET .)
+
+
+state 103
+
+    (66) Output -> OUTPUT LBRACKET Matrix RBRACKET .
+
+    ID              reduce using rule 66 (Output -> OUTPUT LBRACKET Matrix RBRACKET .)
+    IF              reduce using rule 66 (Output -> OUTPUT LBRACKET Matrix RBRACKET .)
+    WHILE           reduce using rule 66 (Output -> OUTPUT LBRACKET Matrix RBRACKET .)
+    REPEAT          reduce using rule 66 (Output -> OUTPUT LBRACKET Matrix RBRACKET .)
+    FOR             reduce using rule 66 (Output -> OUTPUT LBRACKET Matrix RBRACKET .)
+    OUTPUT          reduce using rule 66 (Output -> OUTPUT LBRACKET Matrix RBRACKET .)
+    $end            reduce using rule 66 (Output -> OUTPUT LBRACKET Matrix RBRACKET .)
+    RBRACE          reduce using rule 66 (Output -> OUTPUT LBRACKET Matrix RBRACKET .)
+
+
+state 104
+
+    (33) List -> Num COMMA . List
+    (33) List -> . Num COMMA List
+    (34) List -> . Num
+    (35) List -> .
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+
+    RBRACKET        reduce using rule 35 (List -> .)
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Num                            shift and go to state 69
+    List                           shift and go to state 134
+
+state 105
+
+    (47) Operation -> Expression PLUS Expression .
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDED_BY resolved as shift
+  ! shift/reduce conflict for REMAINDER resolved as shift
+    ID              reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    IF              reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    WHILE           reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    REPEAT          reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    FOR             reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    OUTPUT          reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    $end            reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    RBRACE          reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    SEMICOLON       reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    RPAREN          reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    COMMA           reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    EQUAL           reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    NOT_EQUAL       reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    GREATER         reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    GREATER_EQUAL   reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    LOWER           reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    LOWER_EQUAL     reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    INT             reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    ARRAY           reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    MATRIX          reduce using rule 47 (Operation -> Expression PLUS Expression .)
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+  ! PLUS            [ reduce using rule 47 (Operation -> Expression PLUS Expression .) ]
+  ! MINUS           [ reduce using rule 47 (Operation -> Expression PLUS Expression .) ]
+  ! TIMES           [ reduce using rule 47 (Operation -> Expression PLUS Expression .) ]
+  ! DIVIDED_BY      [ reduce using rule 47 (Operation -> Expression PLUS Expression .) ]
+  ! REMAINDER       [ reduce using rule 47 (Operation -> Expression PLUS Expression .) ]
+
+
+state 106
+
+    (48) Operation -> Expression MINUS Expression .
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDED_BY resolved as shift
+  ! shift/reduce conflict for REMAINDER resolved as shift
+    ID              reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    IF              reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    WHILE           reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    REPEAT          reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    FOR             reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    OUTPUT          reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    $end            reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    RBRACE          reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    SEMICOLON       reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    RPAREN          reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    COMMA           reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    EQUAL           reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    NOT_EQUAL       reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    GREATER         reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    GREATER_EQUAL   reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    LOWER           reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    LOWER_EQUAL     reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    INT             reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    ARRAY           reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    MATRIX          reduce using rule 48 (Operation -> Expression MINUS Expression .)
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+  ! PLUS            [ reduce using rule 48 (Operation -> Expression MINUS Expression .) ]
+  ! MINUS           [ reduce using rule 48 (Operation -> Expression MINUS Expression .) ]
+  ! TIMES           [ reduce using rule 48 (Operation -> Expression MINUS Expression .) ]
+  ! DIVIDED_BY      [ reduce using rule 48 (Operation -> Expression MINUS Expression .) ]
+  ! REMAINDER       [ reduce using rule 48 (Operation -> Expression MINUS Expression .) ]
+
+
+state 107
+
+    (49) Operation -> Expression TIMES Expression .
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDED_BY resolved as shift
+  ! shift/reduce conflict for REMAINDER resolved as shift
+    ID              reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    IF              reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    WHILE           reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    REPEAT          reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    FOR             reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    OUTPUT          reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    $end            reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    RBRACE          reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    SEMICOLON       reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    RPAREN          reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    COMMA           reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    EQUAL           reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    NOT_EQUAL       reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    GREATER         reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    GREATER_EQUAL   reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    LOWER           reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    LOWER_EQUAL     reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    INT             reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    ARRAY           reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    MATRIX          reduce using rule 49 (Operation -> Expression TIMES Expression .)
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+  ! PLUS            [ reduce using rule 49 (Operation -> Expression TIMES Expression .) ]
+  ! MINUS           [ reduce using rule 49 (Operation -> Expression TIMES Expression .) ]
+  ! TIMES           [ reduce using rule 49 (Operation -> Expression TIMES Expression .) ]
+  ! DIVIDED_BY      [ reduce using rule 49 (Operation -> Expression TIMES Expression .) ]
+  ! REMAINDER       [ reduce using rule 49 (Operation -> Expression TIMES Expression .) ]
+
+
+state 108
+
+    (50) Operation -> Expression DIVIDED_BY Expression .
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDED_BY resolved as shift
+  ! shift/reduce conflict for REMAINDER resolved as shift
+    ID              reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    IF              reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    WHILE           reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    REPEAT          reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    FOR             reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    OUTPUT          reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    $end            reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    RBRACE          reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    SEMICOLON       reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    RPAREN          reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    COMMA           reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    EQUAL           reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    NOT_EQUAL       reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    GREATER         reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    GREATER_EQUAL   reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    LOWER           reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    LOWER_EQUAL     reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    INT             reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    ARRAY           reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    MATRIX          reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .)
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+  ! PLUS            [ reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .) ]
+  ! MINUS           [ reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .) ]
+  ! TIMES           [ reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .) ]
+  ! DIVIDED_BY      [ reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .) ]
+  ! REMAINDER       [ reduce using rule 50 (Operation -> Expression DIVIDED_BY Expression .) ]
+
+
+state 109
+
+    (51) Operation -> Expression REMAINDER Expression .
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDED_BY resolved as shift
+  ! shift/reduce conflict for REMAINDER resolved as shift
+    ID              reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    IF              reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    WHILE           reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    REPEAT          reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    FOR             reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    OUTPUT          reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    $end            reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    RBRACE          reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    SEMICOLON       reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    RPAREN          reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    COMMA           reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    EQUAL           reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    NOT_EQUAL       reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    GREATER         reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    GREATER_EQUAL   reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    LOWER           reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    LOWER_EQUAL     reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    INT             reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    ARRAY           reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    MATRIX          reduce using rule 51 (Operation -> Expression REMAINDER Expression .)
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+  ! PLUS            [ reduce using rule 51 (Operation -> Expression REMAINDER Expression .) ]
+  ! MINUS           [ reduce using rule 51 (Operation -> Expression REMAINDER Expression .) ]
+  ! TIMES           [ reduce using rule 51 (Operation -> Expression REMAINDER Expression .) ]
+  ! DIVIDED_BY      [ reduce using rule 51 (Operation -> Expression REMAINDER Expression .) ]
+  ! REMAINDER       [ reduce using rule 51 (Operation -> Expression REMAINDER Expression .) ]
+
+
+state 110
+
+    (22) Assignment -> ID KEEPS LBRACKET List RBRACKET .
+
+    ID              reduce using rule 22 (Assignment -> ID KEEPS LBRACKET List RBRACKET .)
+    IF              reduce using rule 22 (Assignment -> ID KEEPS LBRACKET List RBRACKET .)
+    WHILE           reduce using rule 22 (Assignment -> ID KEEPS LBRACKET List RBRACKET .)
+    REPEAT          reduce using rule 22 (Assignment -> ID KEEPS LBRACKET List RBRACKET .)
+    FOR             reduce using rule 22 (Assignment -> ID KEEPS LBRACKET List RBRACKET .)
+    OUTPUT          reduce using rule 22 (Assignment -> ID KEEPS LBRACKET List RBRACKET .)
+    $end            reduce using rule 22 (Assignment -> ID KEEPS LBRACKET List RBRACKET .)
+    RBRACE          reduce using rule 22 (Assignment -> ID KEEPS LBRACKET List RBRACKET .)
+    SEMICOLON       reduce using rule 22 (Assignment -> ID KEEPS LBRACKET List RBRACKET .)
+    RPAREN          reduce using rule 22 (Assignment -> ID KEEPS LBRACKET List RBRACKET .)
+
+
+state 111
+
+    (24) Assignment -> ID KEEPS LBRACKET Matrix RBRACKET .
+
+    ID              reduce using rule 24 (Assignment -> ID KEEPS LBRACKET Matrix RBRACKET .)
+    IF              reduce using rule 24 (Assignment -> ID KEEPS LBRACKET Matrix RBRACKET .)
+    WHILE           reduce using rule 24 (Assignment -> ID KEEPS LBRACKET Matrix RBRACKET .)
+    REPEAT          reduce using rule 24 (Assignment -> ID KEEPS LBRACKET Matrix RBRACKET .)
+    FOR             reduce using rule 24 (Assignment -> ID KEEPS LBRACKET Matrix RBRACKET .)
+    OUTPUT          reduce using rule 24 (Assignment -> ID KEEPS LBRACKET Matrix RBRACKET .)
+    $end            reduce using rule 24 (Assignment -> ID KEEPS LBRACKET Matrix RBRACKET .)
+    RBRACE          reduce using rule 24 (Assignment -> ID KEEPS LBRACKET Matrix RBRACKET .)
+    SEMICOLON       reduce using rule 24 (Assignment -> ID KEEPS LBRACKET Matrix RBRACKET .)
+    RPAREN          reduce using rule 24 (Assignment -> ID KEEPS LBRACKET Matrix RBRACKET .)
+
+
+state 112
+
+    (45) Expression -> SEARCH ID LPAREN . Expression RPAREN
+    (46) Expression -> SEARCH ID LPAREN . Expression COMMA Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 135
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 113
+
+    (23) Assignment -> ID LPAREN Expression RPAREN KEEPS . Expression
+    (26) Assignment -> ID LPAREN Expression RPAREN KEEPS . LBRACKET List RBRACKET
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    LBRACKET        shift and go to state 137
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 136
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 114
+
+    (29) Assignment -> ID LPAREN Expression RPAREN SWAP . ID LPAREN Expression RPAREN
+    (31) Assignment -> ID LPAREN Expression RPAREN SWAP . ID LPAREN Expression COMMA Expression RPAREN
+
+    ID              shift and go to state 138
+
+
+state 115
+
+    (25) Assignment -> ID LPAREN Expression COMMA Expression . RPAREN KEEPS Expression
+    (30) Assignment -> ID LPAREN Expression COMMA Expression . RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> ID LPAREN Expression COMMA Expression . RPAREN SWAP ID LPAREN Expression RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 139
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 116
+
+    (13) Declaration -> ARRAY ID LPAREN Num RPAREN .
+
+    INT             reduce using rule 13 (Declaration -> ARRAY ID LPAREN Num RPAREN .)
+    ARRAY           reduce using rule 13 (Declaration -> ARRAY ID LPAREN Num RPAREN .)
+    MATRIX          reduce using rule 13 (Declaration -> ARRAY ID LPAREN Num RPAREN .)
+    ID              reduce using rule 13 (Declaration -> ARRAY ID LPAREN Num RPAREN .)
+    IF              reduce using rule 13 (Declaration -> ARRAY ID LPAREN Num RPAREN .)
+    WHILE           reduce using rule 13 (Declaration -> ARRAY ID LPAREN Num RPAREN .)
+    REPEAT          reduce using rule 13 (Declaration -> ARRAY ID LPAREN Num RPAREN .)
+    FOR             reduce using rule 13 (Declaration -> ARRAY ID LPAREN Num RPAREN .)
+    OUTPUT          reduce using rule 13 (Declaration -> ARRAY ID LPAREN Num RPAREN .)
+    $end            reduce using rule 13 (Declaration -> ARRAY ID LPAREN Num RPAREN .)
+
+
+state 117
+
+    (14) Declaration -> ARRAY ID KEEPS LBRACKET List . RBRACKET
+
+    RBRACKET        shift and go to state 140
+
+
+state 118
+
+    (16) Declaration -> ARRAY ID KEEPS SEARCH ID . LPAREN Expression RPAREN
+
+    LPAREN          shift and go to state 141
+
+
+state 119
+
+    (18) Declaration -> MATRIX ID LPAREN Num COMMA . Num RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Num                            shift and go to state 142
+
+state 120
+
+    (19) Declaration -> MATRIX ID KEEPS LBRACKET Matrix . RBRACKET
+
+    RBRACKET        shift and go to state 143
+
+
+state 121
+
+    (57) If -> IF Comparison LBRACE Body RBRACE . END
+    (58) If -> IF Comparison LBRACE Body RBRACE . ELSE LBRACE Body RBRACE END
+
+    END             shift and go to state 144
+    ELSE            shift and go to state 145
+
+
+state 122
+
+    (68) Comparison -> LPAREN Expression EQUAL Expression . RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 146
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 123
+
+    (69) Comparison -> LPAREN Expression NOT_EQUAL Expression . RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 147
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 124
+
+    (70) Comparison -> LPAREN Expression GREATER Expression . RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 148
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 125
+
+    (71) Comparison -> LPAREN Expression GREATER_EQUAL Expression . RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 149
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 126
+
+    (72) Comparison -> LPAREN Expression LOWER Expression . RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 150
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 127
+
+    (73) Comparison -> LPAREN Expression LOWER_EQUAL Expression . RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 151
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 128
+
+    (74) Comparison -> LPAREN Comparison AND Comparison . RPAREN
+
+    RPAREN          shift and go to state 152
+
+
+state 129
+
+    (75) Comparison -> LPAREN Comparison OR Comparison . RPAREN
+
+    RPAREN          shift and go to state 153
+
+
+state 130
+
+    (59) While_Do -> WHILE Comparison DO LBRACE Body . RBRACE END
+
+    RBRACE          shift and go to state 154
+
+
+state 131
+
+    (60) Repeat_Until -> REPEAT LBRACE Body RBRACE UNTIL . Comparison END
+    (67) Comparison -> . NOT Comparison
+    (68) Comparison -> . LPAREN Expression EQUAL Expression RPAREN
+    (69) Comparison -> . LPAREN Expression NOT_EQUAL Expression RPAREN
+    (70) Comparison -> . LPAREN Expression GREATER Expression RPAREN
+    (71) Comparison -> . LPAREN Expression GREATER_EQUAL Expression RPAREN
+    (72) Comparison -> . LPAREN Expression LOWER Expression RPAREN
+    (73) Comparison -> . LPAREN Expression LOWER_EQUAL Expression RPAREN
+    (74) Comparison -> . LPAREN Comparison AND Comparison RPAREN
+    (75) Comparison -> . LPAREN Comparison OR Comparison RPAREN
+
+    NOT             shift and go to state 33
+    LPAREN          shift and go to state 34
+
+    Comparison                     shift and go to state 155
+
+state 132
+
+    (61) For_Do -> FOR LPAREN Assignment SEMICOLON Comparison . SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+
+    SEMICOLON       shift and go to state 156
+
+
+state 133
+
+    (36) Matrix -> LBRACKET List RBRACKET . COMMA Matrix
+    (37) Matrix -> LBRACKET List RBRACKET .
+
+    COMMA           shift and go to state 157
+    RBRACKET        reduce using rule 37 (Matrix -> LBRACKET List RBRACKET .)
+
+
+state 134
+
+    (33) List -> Num COMMA List .
+
+    RBRACKET        reduce using rule 33 (List -> Num COMMA List .)
+
+
+state 135
+
+    (45) Expression -> SEARCH ID LPAREN Expression . RPAREN
+    (46) Expression -> SEARCH ID LPAREN Expression . COMMA Expression RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 158
+    COMMA           shift and go to state 159
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 136
+
+    (23) Assignment -> ID LPAREN Expression RPAREN KEEPS Expression .
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    ID              reduce using rule 23 (Assignment -> ID LPAREN Expression RPAREN KEEPS Expression .)
+    IF              reduce using rule 23 (Assignment -> ID LPAREN Expression RPAREN KEEPS Expression .)
+    WHILE           reduce using rule 23 (Assignment -> ID LPAREN Expression RPAREN KEEPS Expression .)
+    REPEAT          reduce using rule 23 (Assignment -> ID LPAREN Expression RPAREN KEEPS Expression .)
+    FOR             reduce using rule 23 (Assignment -> ID LPAREN Expression RPAREN KEEPS Expression .)
+    OUTPUT          reduce using rule 23 (Assignment -> ID LPAREN Expression RPAREN KEEPS Expression .)
+    $end            reduce using rule 23 (Assignment -> ID LPAREN Expression RPAREN KEEPS Expression .)
+    RBRACE          reduce using rule 23 (Assignment -> ID LPAREN Expression RPAREN KEEPS Expression .)
+    SEMICOLON       reduce using rule 23 (Assignment -> ID LPAREN Expression RPAREN KEEPS Expression .)
+    RPAREN          reduce using rule 23 (Assignment -> ID LPAREN Expression RPAREN KEEPS Expression .)
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 137
+
+    (26) Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET . List RBRACKET
+    (33) List -> . Num COMMA List
+    (34) List -> . Num
+    (35) List -> .
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+
+    RBRACKET        reduce using rule 35 (List -> .)
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    List                           shift and go to state 160
+    Num                            shift and go to state 69
+
+state 138
+
+    (29) Assignment -> ID LPAREN Expression RPAREN SWAP ID . LPAREN Expression RPAREN
+    (31) Assignment -> ID LPAREN Expression RPAREN SWAP ID . LPAREN Expression COMMA Expression RPAREN
+
+    LPAREN          shift and go to state 161
+
+
+state 139
+
+    (25) Assignment -> ID LPAREN Expression COMMA Expression RPAREN . KEEPS Expression
+    (30) Assignment -> ID LPAREN Expression COMMA Expression RPAREN . SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> ID LPAREN Expression COMMA Expression RPAREN . SWAP ID LPAREN Expression RPAREN
+
+    KEEPS           shift and go to state 162
+    SWAP            shift and go to state 163
+
+
+state 140
+
+    (14) Declaration -> ARRAY ID KEEPS LBRACKET List RBRACKET .
+
+    INT             reduce using rule 14 (Declaration -> ARRAY ID KEEPS LBRACKET List RBRACKET .)
+    ARRAY           reduce using rule 14 (Declaration -> ARRAY ID KEEPS LBRACKET List RBRACKET .)
+    MATRIX          reduce using rule 14 (Declaration -> ARRAY ID KEEPS LBRACKET List RBRACKET .)
+    ID              reduce using rule 14 (Declaration -> ARRAY ID KEEPS LBRACKET List RBRACKET .)
+    IF              reduce using rule 14 (Declaration -> ARRAY ID KEEPS LBRACKET List RBRACKET .)
+    WHILE           reduce using rule 14 (Declaration -> ARRAY ID KEEPS LBRACKET List RBRACKET .)
+    REPEAT          reduce using rule 14 (Declaration -> ARRAY ID KEEPS LBRACKET List RBRACKET .)
+    FOR             reduce using rule 14 (Declaration -> ARRAY ID KEEPS LBRACKET List RBRACKET .)
+    OUTPUT          reduce using rule 14 (Declaration -> ARRAY ID KEEPS LBRACKET List RBRACKET .)
+    $end            reduce using rule 14 (Declaration -> ARRAY ID KEEPS LBRACKET List RBRACKET .)
+
+
+state 141
+
+    (16) Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN . Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 164
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 142
+
+    (18) Declaration -> MATRIX ID LPAREN Num COMMA Num . RPAREN
+
+    RPAREN          shift and go to state 165
+
+
+state 143
+
+    (19) Declaration -> MATRIX ID KEEPS LBRACKET Matrix RBRACKET .
+
+    INT             reduce using rule 19 (Declaration -> MATRIX ID KEEPS LBRACKET Matrix RBRACKET .)
+    ARRAY           reduce using rule 19 (Declaration -> MATRIX ID KEEPS LBRACKET Matrix RBRACKET .)
+    MATRIX          reduce using rule 19 (Declaration -> MATRIX ID KEEPS LBRACKET Matrix RBRACKET .)
+    ID              reduce using rule 19 (Declaration -> MATRIX ID KEEPS LBRACKET Matrix RBRACKET .)
+    IF              reduce using rule 19 (Declaration -> MATRIX ID KEEPS LBRACKET Matrix RBRACKET .)
+    WHILE           reduce using rule 19 (Declaration -> MATRIX ID KEEPS LBRACKET Matrix RBRACKET .)
+    REPEAT          reduce using rule 19 (Declaration -> MATRIX ID KEEPS LBRACKET Matrix RBRACKET .)
+    FOR             reduce using rule 19 (Declaration -> MATRIX ID KEEPS LBRACKET Matrix RBRACKET .)
+    OUTPUT          reduce using rule 19 (Declaration -> MATRIX ID KEEPS LBRACKET Matrix RBRACKET .)
+    $end            reduce using rule 19 (Declaration -> MATRIX ID KEEPS LBRACKET Matrix RBRACKET .)
+
+
+state 144
+
+    (57) If -> IF Comparison LBRACE Body RBRACE END .
+
+    ID              reduce using rule 57 (If -> IF Comparison LBRACE Body RBRACE END .)
+    IF              reduce using rule 57 (If -> IF Comparison LBRACE Body RBRACE END .)
+    WHILE           reduce using rule 57 (If -> IF Comparison LBRACE Body RBRACE END .)
+    REPEAT          reduce using rule 57 (If -> IF Comparison LBRACE Body RBRACE END .)
+    FOR             reduce using rule 57 (If -> IF Comparison LBRACE Body RBRACE END .)
+    OUTPUT          reduce using rule 57 (If -> IF Comparison LBRACE Body RBRACE END .)
+    $end            reduce using rule 57 (If -> IF Comparison LBRACE Body RBRACE END .)
+    RBRACE          reduce using rule 57 (If -> IF Comparison LBRACE Body RBRACE END .)
+
+
+state 145
+
+    (58) If -> IF Comparison LBRACE Body RBRACE ELSE . LBRACE Body RBRACE END
+
+    LBRACE          shift and go to state 166
+
+
+state 146
+
+    (68) Comparison -> LPAREN Expression EQUAL Expression RPAREN .
+
+    LBRACE          reduce using rule 68 (Comparison -> LPAREN Expression EQUAL Expression RPAREN .)
+    DO              reduce using rule 68 (Comparison -> LPAREN Expression EQUAL Expression RPAREN .)
+    AND             reduce using rule 68 (Comparison -> LPAREN Expression EQUAL Expression RPAREN .)
+    OR              reduce using rule 68 (Comparison -> LPAREN Expression EQUAL Expression RPAREN .)
+    RPAREN          reduce using rule 68 (Comparison -> LPAREN Expression EQUAL Expression RPAREN .)
+    SEMICOLON       reduce using rule 68 (Comparison -> LPAREN Expression EQUAL Expression RPAREN .)
+    END             reduce using rule 68 (Comparison -> LPAREN Expression EQUAL Expression RPAREN .)
+
+
+state 147
+
+    (69) Comparison -> LPAREN Expression NOT_EQUAL Expression RPAREN .
+
+    LBRACE          reduce using rule 69 (Comparison -> LPAREN Expression NOT_EQUAL Expression RPAREN .)
+    DO              reduce using rule 69 (Comparison -> LPAREN Expression NOT_EQUAL Expression RPAREN .)
+    AND             reduce using rule 69 (Comparison -> LPAREN Expression NOT_EQUAL Expression RPAREN .)
+    OR              reduce using rule 69 (Comparison -> LPAREN Expression NOT_EQUAL Expression RPAREN .)
+    RPAREN          reduce using rule 69 (Comparison -> LPAREN Expression NOT_EQUAL Expression RPAREN .)
+    SEMICOLON       reduce using rule 69 (Comparison -> LPAREN Expression NOT_EQUAL Expression RPAREN .)
+    END             reduce using rule 69 (Comparison -> LPAREN Expression NOT_EQUAL Expression RPAREN .)
+
+
+state 148
+
+    (70) Comparison -> LPAREN Expression GREATER Expression RPAREN .
+
+    LBRACE          reduce using rule 70 (Comparison -> LPAREN Expression GREATER Expression RPAREN .)
+    DO              reduce using rule 70 (Comparison -> LPAREN Expression GREATER Expression RPAREN .)
+    AND             reduce using rule 70 (Comparison -> LPAREN Expression GREATER Expression RPAREN .)
+    OR              reduce using rule 70 (Comparison -> LPAREN Expression GREATER Expression RPAREN .)
+    RPAREN          reduce using rule 70 (Comparison -> LPAREN Expression GREATER Expression RPAREN .)
+    SEMICOLON       reduce using rule 70 (Comparison -> LPAREN Expression GREATER Expression RPAREN .)
+    END             reduce using rule 70 (Comparison -> LPAREN Expression GREATER Expression RPAREN .)
+
+
+state 149
+
+    (71) Comparison -> LPAREN Expression GREATER_EQUAL Expression RPAREN .
+
+    LBRACE          reduce using rule 71 (Comparison -> LPAREN Expression GREATER_EQUAL Expression RPAREN .)
+    DO              reduce using rule 71 (Comparison -> LPAREN Expression GREATER_EQUAL Expression RPAREN .)
+    AND             reduce using rule 71 (Comparison -> LPAREN Expression GREATER_EQUAL Expression RPAREN .)
+    OR              reduce using rule 71 (Comparison -> LPAREN Expression GREATER_EQUAL Expression RPAREN .)
+    RPAREN          reduce using rule 71 (Comparison -> LPAREN Expression GREATER_EQUAL Expression RPAREN .)
+    SEMICOLON       reduce using rule 71 (Comparison -> LPAREN Expression GREATER_EQUAL Expression RPAREN .)
+    END             reduce using rule 71 (Comparison -> LPAREN Expression GREATER_EQUAL Expression RPAREN .)
+
+
+state 150
+
+    (72) Comparison -> LPAREN Expression LOWER Expression RPAREN .
+
+    LBRACE          reduce using rule 72 (Comparison -> LPAREN Expression LOWER Expression RPAREN .)
+    DO              reduce using rule 72 (Comparison -> LPAREN Expression LOWER Expression RPAREN .)
+    AND             reduce using rule 72 (Comparison -> LPAREN Expression LOWER Expression RPAREN .)
+    OR              reduce using rule 72 (Comparison -> LPAREN Expression LOWER Expression RPAREN .)
+    RPAREN          reduce using rule 72 (Comparison -> LPAREN Expression LOWER Expression RPAREN .)
+    SEMICOLON       reduce using rule 72 (Comparison -> LPAREN Expression LOWER Expression RPAREN .)
+    END             reduce using rule 72 (Comparison -> LPAREN Expression LOWER Expression RPAREN .)
+
+
+state 151
+
+    (73) Comparison -> LPAREN Expression LOWER_EQUAL Expression RPAREN .
+
+    LBRACE          reduce using rule 73 (Comparison -> LPAREN Expression LOWER_EQUAL Expression RPAREN .)
+    DO              reduce using rule 73 (Comparison -> LPAREN Expression LOWER_EQUAL Expression RPAREN .)
+    AND             reduce using rule 73 (Comparison -> LPAREN Expression LOWER_EQUAL Expression RPAREN .)
+    OR              reduce using rule 73 (Comparison -> LPAREN Expression LOWER_EQUAL Expression RPAREN .)
+    RPAREN          reduce using rule 73 (Comparison -> LPAREN Expression LOWER_EQUAL Expression RPAREN .)
+    SEMICOLON       reduce using rule 73 (Comparison -> LPAREN Expression LOWER_EQUAL Expression RPAREN .)
+    END             reduce using rule 73 (Comparison -> LPAREN Expression LOWER_EQUAL Expression RPAREN .)
+
+
+state 152
+
+    (74) Comparison -> LPAREN Comparison AND Comparison RPAREN .
+
+    LBRACE          reduce using rule 74 (Comparison -> LPAREN Comparison AND Comparison RPAREN .)
+    DO              reduce using rule 74 (Comparison -> LPAREN Comparison AND Comparison RPAREN .)
+    AND             reduce using rule 74 (Comparison -> LPAREN Comparison AND Comparison RPAREN .)
+    OR              reduce using rule 74 (Comparison -> LPAREN Comparison AND Comparison RPAREN .)
+    RPAREN          reduce using rule 74 (Comparison -> LPAREN Comparison AND Comparison RPAREN .)
+    SEMICOLON       reduce using rule 74 (Comparison -> LPAREN Comparison AND Comparison RPAREN .)
+    END             reduce using rule 74 (Comparison -> LPAREN Comparison AND Comparison RPAREN .)
+
+
+state 153
+
+    (75) Comparison -> LPAREN Comparison OR Comparison RPAREN .
+
+    LBRACE          reduce using rule 75 (Comparison -> LPAREN Comparison OR Comparison RPAREN .)
+    DO              reduce using rule 75 (Comparison -> LPAREN Comparison OR Comparison RPAREN .)
+    AND             reduce using rule 75 (Comparison -> LPAREN Comparison OR Comparison RPAREN .)
+    OR              reduce using rule 75 (Comparison -> LPAREN Comparison OR Comparison RPAREN .)
+    RPAREN          reduce using rule 75 (Comparison -> LPAREN Comparison OR Comparison RPAREN .)
+    SEMICOLON       reduce using rule 75 (Comparison -> LPAREN Comparison OR Comparison RPAREN .)
+    END             reduce using rule 75 (Comparison -> LPAREN Comparison OR Comparison RPAREN .)
+
+
+state 154
+
+    (59) While_Do -> WHILE Comparison DO LBRACE Body RBRACE . END
+
+    END             shift and go to state 167
+
+
+state 155
+
+    (60) Repeat_Until -> REPEAT LBRACE Body RBRACE UNTIL Comparison . END
+
+    END             shift and go to state 168
+
+
+state 156
+
+    (61) For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON . Assignment RPAREN DO LBRACE Body RBRACE END
+    (21) Assignment -> . ID KEEPS Expression
+    (22) Assignment -> . ID KEEPS LBRACKET List RBRACKET
+    (23) Assignment -> . ID LPAREN Expression RPAREN KEEPS Expression
+    (24) Assignment -> . ID KEEPS LBRACKET Matrix RBRACKET
+    (25) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> . ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET
+    (27) Assignment -> . ID PLUS PLUS
+    (28) Assignment -> . ID MINUS MINUS
+    (29) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+
+    ID              shift and go to state 8
+
+    Assignment                     shift and go to state 169
+
+state 157
+
+    (36) Matrix -> LBRACKET List RBRACKET COMMA . Matrix
+    (36) Matrix -> . LBRACKET List RBRACKET COMMA Matrix
+    (37) Matrix -> . LBRACKET List RBRACKET
+    (38) Matrix -> .
+
+    LBRACKET        shift and go to state 66
+    RBRACKET        reduce using rule 38 (Matrix -> .)
+
+    Matrix                         shift and go to state 170
+
+state 158
+
+    (45) Expression -> SEARCH ID LPAREN Expression RPAREN .
+
+    PLUS            reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    MINUS           reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    TIMES           reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    DIVIDED_BY      reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    REMAINDER       reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    ID              reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    IF              reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    WHILE           reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    REPEAT          reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    FOR             reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    OUTPUT          reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    $end            reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    RBRACE          reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    SEMICOLON       reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    RPAREN          reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    COMMA           reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    EQUAL           reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    NOT_EQUAL       reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    GREATER         reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    GREATER_EQUAL   reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    LOWER           reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    LOWER_EQUAL     reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    INT             reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    ARRAY           reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+    MATRIX          reduce using rule 45 (Expression -> SEARCH ID LPAREN Expression RPAREN .)
+
+
+state 159
+
+    (46) Expression -> SEARCH ID LPAREN Expression COMMA . Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 171
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 160
+
+    (26) Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET List . RBRACKET
+
+    RBRACKET        shift and go to state 172
+
+
+state 161
+
+    (29) Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN . Expression RPAREN
+    (31) Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN . Expression COMMA Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 173
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 162
+
+    (25) Assignment -> ID LPAREN Expression COMMA Expression RPAREN KEEPS . Expression
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 174
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 163
+
+    (30) Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP . ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP . ID LPAREN Expression RPAREN
+
+    ID              shift and go to state 175
+
+
+state 164
+
+    (16) Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN Expression . RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 176
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 165
+
+    (18) Declaration -> MATRIX ID LPAREN Num COMMA Num RPAREN .
+
+    INT             reduce using rule 18 (Declaration -> MATRIX ID LPAREN Num COMMA Num RPAREN .)
+    ARRAY           reduce using rule 18 (Declaration -> MATRIX ID LPAREN Num COMMA Num RPAREN .)
+    MATRIX          reduce using rule 18 (Declaration -> MATRIX ID LPAREN Num COMMA Num RPAREN .)
+    ID              reduce using rule 18 (Declaration -> MATRIX ID LPAREN Num COMMA Num RPAREN .)
+    IF              reduce using rule 18 (Declaration -> MATRIX ID LPAREN Num COMMA Num RPAREN .)
+    WHILE           reduce using rule 18 (Declaration -> MATRIX ID LPAREN Num COMMA Num RPAREN .)
+    REPEAT          reduce using rule 18 (Declaration -> MATRIX ID LPAREN Num COMMA Num RPAREN .)
+    FOR             reduce using rule 18 (Declaration -> MATRIX ID LPAREN Num COMMA Num RPAREN .)
+    OUTPUT          reduce using rule 18 (Declaration -> MATRIX ID LPAREN Num COMMA Num RPAREN .)
+    $end            reduce using rule 18 (Declaration -> MATRIX ID LPAREN Num COMMA Num RPAREN .)
+
+
+state 166
+
+    (58) If -> IF Comparison LBRACE Body RBRACE ELSE LBRACE . Body RBRACE END
+    (6) Body -> . Assignment Body
+    (7) Body -> . Statement Body
+    (8) Body -> . Assignment
+    (9) Body -> . Statement
+    (21) Assignment -> . ID KEEPS Expression
+    (22) Assignment -> . ID KEEPS LBRACKET List RBRACKET
+    (23) Assignment -> . ID LPAREN Expression RPAREN KEEPS Expression
+    (24) Assignment -> . ID KEEPS LBRACKET Matrix RBRACKET
+    (25) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> . ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET
+    (27) Assignment -> . ID PLUS PLUS
+    (28) Assignment -> . ID MINUS MINUS
+    (29) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (52) Statement -> . If
+    (53) Statement -> . While_Do
+    (54) Statement -> . Repeat_Until
+    (55) Statement -> . For_Do
+    (56) Statement -> . Output
+    (57) If -> . IF Comparison LBRACE Body RBRACE END
+    (58) If -> . IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END
+    (59) While_Do -> . WHILE Comparison DO LBRACE Body RBRACE END
+    (60) Repeat_Until -> . REPEAT LBRACE Body RBRACE UNTIL Comparison END
+    (61) For_Do -> . FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+    (62) Output -> . OUTPUT TEXT
+    (63) Output -> . OUTPUT ID
+    (64) Output -> . OUTPUT Num
+    (65) Output -> . OUTPUT LBRACKET List RBRACKET
+    (66) Output -> . OUTPUT LBRACKET Matrix RBRACKET
+
+    ID              shift and go to state 8
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    REPEAT          shift and go to state 18
+    FOR             shift and go to state 19
+    OUTPUT          shift and go to state 20
+
+    Body                           shift and go to state 177
+    Assignment                     shift and go to state 5
+    Statement                      shift and go to state 6
+    If                             shift and go to state 11
+    While_Do                       shift and go to state 12
+    Repeat_Until                   shift and go to state 13
+    For_Do                         shift and go to state 14
+    Output                         shift and go to state 15
+
+state 167
+
+    (59) While_Do -> WHILE Comparison DO LBRACE Body RBRACE END .
+
+    ID              reduce using rule 59 (While_Do -> WHILE Comparison DO LBRACE Body RBRACE END .)
+    IF              reduce using rule 59 (While_Do -> WHILE Comparison DO LBRACE Body RBRACE END .)
+    WHILE           reduce using rule 59 (While_Do -> WHILE Comparison DO LBRACE Body RBRACE END .)
+    REPEAT          reduce using rule 59 (While_Do -> WHILE Comparison DO LBRACE Body RBRACE END .)
+    FOR             reduce using rule 59 (While_Do -> WHILE Comparison DO LBRACE Body RBRACE END .)
+    OUTPUT          reduce using rule 59 (While_Do -> WHILE Comparison DO LBRACE Body RBRACE END .)
+    $end            reduce using rule 59 (While_Do -> WHILE Comparison DO LBRACE Body RBRACE END .)
+    RBRACE          reduce using rule 59 (While_Do -> WHILE Comparison DO LBRACE Body RBRACE END .)
+
+
+state 168
+
+    (60) Repeat_Until -> REPEAT LBRACE Body RBRACE UNTIL Comparison END .
+
+    ID              reduce using rule 60 (Repeat_Until -> REPEAT LBRACE Body RBRACE UNTIL Comparison END .)
+    IF              reduce using rule 60 (Repeat_Until -> REPEAT LBRACE Body RBRACE UNTIL Comparison END .)
+    WHILE           reduce using rule 60 (Repeat_Until -> REPEAT LBRACE Body RBRACE UNTIL Comparison END .)
+    REPEAT          reduce using rule 60 (Repeat_Until -> REPEAT LBRACE Body RBRACE UNTIL Comparison END .)
+    FOR             reduce using rule 60 (Repeat_Until -> REPEAT LBRACE Body RBRACE UNTIL Comparison END .)
+    OUTPUT          reduce using rule 60 (Repeat_Until -> REPEAT LBRACE Body RBRACE UNTIL Comparison END .)
+    $end            reduce using rule 60 (Repeat_Until -> REPEAT LBRACE Body RBRACE UNTIL Comparison END .)
+    RBRACE          reduce using rule 60 (Repeat_Until -> REPEAT LBRACE Body RBRACE UNTIL Comparison END .)
+
+
+state 169
+
+    (61) For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment . RPAREN DO LBRACE Body RBRACE END
+
+    RPAREN          shift and go to state 178
+
+
+state 170
+
+    (36) Matrix -> LBRACKET List RBRACKET COMMA Matrix .
+
+    RBRACKET        reduce using rule 36 (Matrix -> LBRACKET List RBRACKET COMMA Matrix .)
+
+
+state 171
+
+    (46) Expression -> SEARCH ID LPAREN Expression COMMA Expression . RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 179
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 172
+
+    (26) Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET .
+
+    ID              reduce using rule 26 (Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET .)
+    IF              reduce using rule 26 (Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET .)
+    WHILE           reduce using rule 26 (Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET .)
+    REPEAT          reduce using rule 26 (Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET .)
+    FOR             reduce using rule 26 (Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET .)
+    OUTPUT          reduce using rule 26 (Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET .)
+    $end            reduce using rule 26 (Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET .)
+    RBRACE          reduce using rule 26 (Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET .)
+    SEMICOLON       reduce using rule 26 (Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET .)
+    RPAREN          reduce using rule 26 (Assignment -> ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET .)
+
+
+state 173
+
+    (29) Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression . RPAREN
+    (31) Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression . COMMA Expression RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 180
+    COMMA           shift and go to state 181
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 174
+
+    (25) Assignment -> ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression .
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    ID              reduce using rule 25 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression .)
+    IF              reduce using rule 25 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression .)
+    WHILE           reduce using rule 25 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression .)
+    REPEAT          reduce using rule 25 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression .)
+    FOR             reduce using rule 25 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression .)
+    OUTPUT          reduce using rule 25 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression .)
+    $end            reduce using rule 25 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression .)
+    RBRACE          reduce using rule 25 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression .)
+    SEMICOLON       reduce using rule 25 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression .)
+    RPAREN          reduce using rule 25 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression .)
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 175
+
+    (30) Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID . LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID . LPAREN Expression RPAREN
+
+    LPAREN          shift and go to state 182
+
+
+state 176
+
+    (16) Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN .
+
+    INT             reduce using rule 16 (Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN .)
+    ARRAY           reduce using rule 16 (Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN .)
+    MATRIX          reduce using rule 16 (Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN .)
+    ID              reduce using rule 16 (Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN .)
+    IF              reduce using rule 16 (Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN .)
+    WHILE           reduce using rule 16 (Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN .)
+    REPEAT          reduce using rule 16 (Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN .)
+    FOR             reduce using rule 16 (Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN .)
+    OUTPUT          reduce using rule 16 (Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN .)
+    $end            reduce using rule 16 (Declaration -> ARRAY ID KEEPS SEARCH ID LPAREN Expression RPAREN .)
+
+
+state 177
+
+    (58) If -> IF Comparison LBRACE Body RBRACE ELSE LBRACE Body . RBRACE END
+
+    RBRACE          shift and go to state 183
+
+
+state 178
+
+    (61) For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN . DO LBRACE Body RBRACE END
+
+    DO              shift and go to state 184
+
+
+state 179
+
+    (46) Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .
+
+    PLUS            reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    MINUS           reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    TIMES           reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    DIVIDED_BY      reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    REMAINDER       reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    ID              reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    IF              reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    WHILE           reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    REPEAT          reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    FOR             reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    OUTPUT          reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    $end            reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    RBRACE          reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    SEMICOLON       reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    RPAREN          reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    COMMA           reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    EQUAL           reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    NOT_EQUAL       reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    GREATER         reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    GREATER_EQUAL   reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    LOWER           reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    LOWER_EQUAL     reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    INT             reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    ARRAY           reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+    MATRIX          reduce using rule 46 (Expression -> SEARCH ID LPAREN Expression COMMA Expression RPAREN .)
+
+
+state 180
+
+    (29) Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN .
+
+    ID              reduce using rule 29 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    IF              reduce using rule 29 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    WHILE           reduce using rule 29 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    REPEAT          reduce using rule 29 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    FOR             reduce using rule 29 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    OUTPUT          reduce using rule 29 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    $end            reduce using rule 29 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    RBRACE          reduce using rule 29 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    SEMICOLON       reduce using rule 29 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    RPAREN          reduce using rule 29 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+
+
+state 181
+
+    (31) Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA . Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 185
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 182
+
+    (30) Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN . Expression COMMA Expression RPAREN
+    (32) Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN . Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 186
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 183
+
+    (58) If -> IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE . END
+
+    END             shift and go to state 187
+
+
+state 184
+
+    (61) For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO . LBRACE Body RBRACE END
+
+    LBRACE          shift and go to state 188
+
+
+state 185
+
+    (31) Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression . RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 189
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 186
+
+    (30) Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression . COMMA Expression RPAREN
+    (32) Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression . RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    COMMA           shift and go to state 190
+    RPAREN          shift and go to state 191
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 187
+
+    (58) If -> IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END .
+
+    ID              reduce using rule 58 (If -> IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END .)
+    IF              reduce using rule 58 (If -> IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END .)
+    WHILE           reduce using rule 58 (If -> IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END .)
+    REPEAT          reduce using rule 58 (If -> IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END .)
+    FOR             reduce using rule 58 (If -> IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END .)
+    OUTPUT          reduce using rule 58 (If -> IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END .)
+    $end            reduce using rule 58 (If -> IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END .)
+    RBRACE          reduce using rule 58 (If -> IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END .)
+
+
+state 188
+
+    (61) For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE . Body RBRACE END
+    (6) Body -> . Assignment Body
+    (7) Body -> . Statement Body
+    (8) Body -> . Assignment
+    (9) Body -> . Statement
+    (21) Assignment -> . ID KEEPS Expression
+    (22) Assignment -> . ID KEEPS LBRACKET List RBRACKET
+    (23) Assignment -> . ID LPAREN Expression RPAREN KEEPS Expression
+    (24) Assignment -> . ID KEEPS LBRACKET Matrix RBRACKET
+    (25) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression
+    (26) Assignment -> . ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET
+    (27) Assignment -> . ID PLUS PLUS
+    (28) Assignment -> . ID MINUS MINUS
+    (29) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (30) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (31) Assignment -> . ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+    (32) Assignment -> . ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+    (52) Statement -> . If
+    (53) Statement -> . While_Do
+    (54) Statement -> . Repeat_Until
+    (55) Statement -> . For_Do
+    (56) Statement -> . Output
+    (57) If -> . IF Comparison LBRACE Body RBRACE END
+    (58) If -> . IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END
+    (59) While_Do -> . WHILE Comparison DO LBRACE Body RBRACE END
+    (60) Repeat_Until -> . REPEAT LBRACE Body RBRACE UNTIL Comparison END
+    (61) For_Do -> . FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+    (62) Output -> . OUTPUT TEXT
+    (63) Output -> . OUTPUT ID
+    (64) Output -> . OUTPUT Num
+    (65) Output -> . OUTPUT LBRACKET List RBRACKET
+    (66) Output -> . OUTPUT LBRACKET Matrix RBRACKET
+
+    ID              shift and go to state 8
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    REPEAT          shift and go to state 18
+    FOR             shift and go to state 19
+    OUTPUT          shift and go to state 20
+
+    Assignment                     shift and go to state 5
+    Body                           shift and go to state 192
+    Statement                      shift and go to state 6
+    If                             shift and go to state 11
+    While_Do                       shift and go to state 12
+    Repeat_Until                   shift and go to state 13
+    For_Do                         shift and go to state 14
+    Output                         shift and go to state 15
+
+state 189
+
+    (31) Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .
+
+    ID              reduce using rule 31 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    IF              reduce using rule 31 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    WHILE           reduce using rule 31 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    REPEAT          reduce using rule 31 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    FOR             reduce using rule 31 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    OUTPUT          reduce using rule 31 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    $end            reduce using rule 31 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    RBRACE          reduce using rule 31 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    SEMICOLON       reduce using rule 31 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    RPAREN          reduce using rule 31 (Assignment -> ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+
+
+state 190
+
+    (30) Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA . Expression RPAREN
+    (41) Expression -> . Num
+    (42) Expression -> . ID
+    (43) Expression -> . INPUT
+    (44) Expression -> . Operation
+    (45) Expression -> . SEARCH ID LPAREN Expression RPAREN
+    (46) Expression -> . SEARCH ID LPAREN Expression COMMA Expression RPAREN
+    (39) Num -> . NUM
+    (40) Num -> . NEGATIVE NUM
+    (47) Operation -> . Expression PLUS Expression
+    (48) Operation -> . Expression MINUS Expression
+    (49) Operation -> . Expression TIMES Expression
+    (50) Operation -> . Expression DIVIDED_BY Expression
+    (51) Operation -> . Expression REMAINDER Expression
+
+    ID              shift and go to state 45
+    INPUT           shift and go to state 49
+    SEARCH          shift and go to state 51
+    NUM             shift and go to state 42
+    NEGATIVE        shift and go to state 43
+
+    Expression                     shift and go to state 193
+    Num                            shift and go to state 48
+    Operation                      shift and go to state 50
+
+state 191
+
+    (32) Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN .
+
+    ID              reduce using rule 32 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    IF              reduce using rule 32 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    WHILE           reduce using rule 32 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    REPEAT          reduce using rule 32 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    FOR             reduce using rule 32 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    OUTPUT          reduce using rule 32 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    $end            reduce using rule 32 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    RBRACE          reduce using rule 32 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    SEMICOLON       reduce using rule 32 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+    RPAREN          reduce using rule 32 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN .)
+
+
+state 192
+
+    (61) For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body . RBRACE END
+
+    RBRACE          shift and go to state 194
+
+
+state 193
+
+    (30) Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression . RPAREN
+    (47) Operation -> Expression . PLUS Expression
+    (48) Operation -> Expression . MINUS Expression
+    (49) Operation -> Expression . TIMES Expression
+    (50) Operation -> Expression . DIVIDED_BY Expression
+    (51) Operation -> Expression . REMAINDER Expression
+
+    RPAREN          shift and go to state 195
+    PLUS            shift and go to state 72
+    MINUS           shift and go to state 73
+    TIMES           shift and go to state 74
+    DIVIDED_BY      shift and go to state 75
+    REMAINDER       shift and go to state 76
+
+
+state 194
+
+    (61) For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE . END
+
+    END             shift and go to state 196
+
+
+state 195
+
+    (30) Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .
+
+    ID              reduce using rule 30 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    IF              reduce using rule 30 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    WHILE           reduce using rule 30 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    REPEAT          reduce using rule 30 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    FOR             reduce using rule 30 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    OUTPUT          reduce using rule 30 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    $end            reduce using rule 30 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    RBRACE          reduce using rule 30 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    SEMICOLON       reduce using rule 30 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+    RPAREN          reduce using rule 30 (Assignment -> ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN .)
+
+
+state 196
+
+    (61) For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END .
+
+    ID              reduce using rule 61 (For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END .)
+    IF              reduce using rule 61 (For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END .)
+    WHILE           reduce using rule 61 (For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END .)
+    REPEAT          reduce using rule 61 (For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END .)
+    FOR             reduce using rule 61 (For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END .)
+    OUTPUT          reduce using rule 61 (For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END .)
+    $end            reduce using rule 61 (For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END .)
+    RBRACE          reduce using rule 61 (For_Do -> FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 105 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 105 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 105 resolved as shift
+WARNING: shift/reduce conflict for DIVIDED_BY in state 105 resolved as shift
+WARNING: shift/reduce conflict for REMAINDER in state 105 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 106 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 106 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 106 resolved as shift
+WARNING: shift/reduce conflict for DIVIDED_BY in state 106 resolved as shift
+WARNING: shift/reduce conflict for REMAINDER in state 106 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 107 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 107 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 107 resolved as shift
+WARNING: shift/reduce conflict for DIVIDED_BY in state 107 resolved as shift
+WARNING: shift/reduce conflict for REMAINDER in state 107 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 108 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 108 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 108 resolved as shift
+WARNING: shift/reduce conflict for DIVIDED_BY in state 108 resolved as shift
+WARNING: shift/reduce conflict for REMAINDER in state 108 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 109 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 109 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 109 resolved as shift
+WARNING: shift/reduce conflict for DIVIDED_BY in state 109 resolved as shift
+WARNING: shift/reduce conflict for REMAINDER in state 109 resolved as shift
+WARNING: reduce/reduce conflict in state 41 resolved using rule (List -> <empty>)
+WARNING: rejected rule (Matrix -> <empty>) in state 41
+WARNING: reduce/reduce conflict in state 47 resolved using rule (List -> <empty>)
+WARNING: rejected rule (Matrix -> <empty>) in state 47

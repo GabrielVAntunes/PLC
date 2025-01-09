@@ -1,0 +1,32 @@
+INT a
+INT b 
+
+OUTPUT "Introduza um valor entre 1 e 10\n"
+a KEEPS INPUT
+OUTPUT "Input: "
+OUTPUT a
+OUTPUT "\n"
+
+WHILE ((a GREATER 10) OR (a LOWER 1)) DO {
+    OUTPUT "O valor introduzido é invalido, introduza outro\n"
+    a KEEPS INPUT
+    OUTPUT "Input: "
+    OUTPUT a
+    OUTPUT "\n"
+} END
+
+b KEEPS a
+
+OUTPUT "o fatorial de "
+OUTPUT b
+OUTPUT " é: "
+
+REPEAT {
+    
+    a MINUS MINUS
+    b KEEPS b TIMES a
+    
+    
+} UNTIL (a LOWEREQUAL 1) END
+
+OUTPUT b

@@ -1,0 +1,45 @@
+MATRIX a KEEPS [[1,2],[3,4]]
+MATRIX b KEEPS [[10,20],[30,40]]
+
+ARRAY c KEEPS [25,50,75,100]
+ARRAY d KEEPS [-1,-2,-3,-4]
+
+OUTPUT "MATRIXS a e b antes do SWAP\n"
+OUTPUT "a: "
+OUTPUT a
+OUTPUT "\nb: "
+OUTPUT b
+
+a(0,0) SWAP b(0,1)
+b(1) SWAP a(1)
+
+OUTPUT "\nMATRIXS a e b depois do SWAP\n"
+OUTPUT "a: "
+OUTPUT a
+OUTPUT "\nb: "
+OUTPUT b
+
+OUTPUT "\nARRAY d e MATRIX b antes do SWAP\n"
+OUTPUT "d: "
+OUTPUT d
+OUTPUT "\nb: "
+OUTPUT b
+
+d(0) SWAP b(0,0)
+
+OUTPUT "\nARRAY d e MATRIX b depois do SWAP\n"
+OUTPUT "d: "
+OUTPUT d
+OUTPUT "\nb: "
+OUTPUT b
+
+OUTPUT "\nARRAY c antes do SWAP\n"
+OUTPUT "c: "
+OUTPUT c
+
+c(1) SWAP c(2)
+
+OUTPUT "\nARRAY c antes do SWAP\n"
+OUTPUT "c: "
+OUTPUT c
+

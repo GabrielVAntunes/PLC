@@ -1,0 +1,13 @@
+ARRAY a KEEPS [1,2,3]
+ARRAY b KEEPS a
+MATRIX c KEEPS [[2,4],[6,8]]
+MATRIX d(3,2)
+
+OUTPUT "a: "
+OUTPUT a
+OUTPUT "\nb: "
+OUTPUT b
+OUTPUT "\nc: "
+OUTPUT c
+OUTPUT "\nd: "
+OUTPUT d

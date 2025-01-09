@@ -1,0 +1,13 @@
+INT a 
+INT b KEEPS 5
+ARRAY v(5)
+MATRIX m KEEPS [[-1,2],[3,4]]
+
+OUTPUT "a: "
+OUTPUT a
+OUTPUT "\nb: "
+OUTPUT b
+OUTPUT "\nv: "
+OUTPUT v
+OUTPUT "\nm: "
+OUTPUT m

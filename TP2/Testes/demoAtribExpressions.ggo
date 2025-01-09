@@ -1,0 +1,16 @@
+INT a KEEPS 5
+INT b KEEPS 10
+INT c 
+INT d
+INT e
+
+c KEEPS b
+d KEEPS 15 PLUS 15
+e KEEPS d TIMES 2
+
+OUTPUT "c: "
+OUTPUT c
+OUTPUT "\nd: "
+OUTPUT d
+OUTPUT "\ne: "
+OUTPUT e

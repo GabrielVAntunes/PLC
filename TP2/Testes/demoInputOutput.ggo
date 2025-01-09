@@ -1,0 +1,15 @@
+INT a
+INT b
+
+OUTPUT "Insira um número para se seja calculado o seu quadrado\n"
+a KEEPS INPUT
+
+OUTPUT "Input: "
+OUTPUT a
+OUTPUT "\n"
+
+b KEEPS a TIMES a
+
+OUTPUT a
+OUTPUT " ao quadrado é igual a "
+OUTPUT b

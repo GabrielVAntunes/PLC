@@ -1,0 +1,22 @@
+MATRIX a KEEPS [[1,2],[3,4],[5,6]]
+MATRIX b KEEPS a
+
+ARRAY c KEEPS [25,50,75,100]
+ARRAY d(2)
+
+INT i
+INT temp
+
+FOR (i KEEPS 0; (i LOWER 4); i PLUS PLUS) DO {
+    temp KEEPS SEARCH c(i)
+    OUTPUT "Elemento no índice "
+    OUTPUT i
+    OUTPUT " da lista c: "
+    OUTPUT temp
+    OUTPUT "\n"
+} END
+
+d KEEPS SEARCH a(1)
+
+OUTPUT "d: "
+OUTPUT d

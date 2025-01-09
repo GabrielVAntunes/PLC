@@ -1,0 +1,4 @@
+INT a KEEPS 5
+INT a KEEPS 10
+
+b KEEPS [1,2,3]

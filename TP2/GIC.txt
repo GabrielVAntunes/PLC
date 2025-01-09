@@ -1,0 +1,92 @@
+Program     : Decls 
+            | Decls Body
+            | Body
+
+Decls       : Declaration Decls
+            | Declaration
+
+Body        : Assignment Body
+            | Statement Body
+            | Declaration Body
+            | Assignment
+            | Statement
+            | Declaration
+
+Declaration : INT ID
+            | INT ID KEEPS Expression
+            | ARRAY ID 
+            | ARRAY ID LPAREN Num RPAREN       
+            | ARRAY ID KEEPS LBRACKET List RBRACKET 
+            | ARRAY ID KEEPS ID
+            | MATRIX ID 
+            | MATRIX ID LPAREN Num COMMA Num RPAREN   
+            | MATRIX ID KEEPS LBRACKET Matrix RBRACKET 
+            | MATRIX ID KEEPS ID
+
+Assignment  : ID KEEPS Expression     
+            | ID KEEPS LBRACKET List RBRACKET
+            | ID LPAREN Expression RPAREN KEEPS Expression   
+            | ID KEEPS LBRACKET Matrix RBRACKET 
+            | ID LPAREN Expression COMMA Expression RPAREN KEEPS Expression  
+            | ID LPAREN Expression RPAREN KEEPS LBRACKET List RBRACKET   
+            | ID PLUS PLUS
+            | ID MINUS MINUS
+            | ID LPAREN Expression RPAREN SWAP ID LPAREN Expression RPAREN
+            | ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+            | ID LPAREN Expression RPAREN SWAP ID LPAREN Expression COMMA Expression RPAREN
+            | ID LPAREN Expression COMMA Expression RPAREN SWAP ID LPAREN Expression RPAREN
+
+List        : Num COMMA List
+            | Num
+            |
+
+Matrix      : LBRACKET List RBRACKET COMMA Matrix
+            | LBRACKET List RBRACKET
+            |
+
+Num         : NUM
+            | NEGATIVE NUM
+
+Expression  : Num
+            | ID
+            | INPUT
+            | Operation
+            | SEARCH ID LPAREN Expression RPAREN
+            | SEARCH ID LPAREN Expression COMMA Expression RPAREN
+
+Operation   : Expression PLUS Expression
+            | Expression MINUS Expression
+            | Expression TIMES Expression
+            | Expression DIVIDEDBY Expression
+            | Expression REMAINDER Expression
+
+Statement   : If
+            | While_Do
+            | Repeat_Until
+            | For_Do
+            | Output
+
+If          : IF Comparison LBRACE Body RBRACE END  
+            | IF Comparison LBRACE Body RBRACE ELSE LBRACE Body RBRACE END
+
+While_Do    : WHILE Comparison DO LBRACE Body RBRACE END
+
+Repeat_Until: REPEAT LBRACE Body RBRACE UNTIL Comparison END
+
+For_Do      : FOR LPAREN Assignment SEMICOLON Comparison SEMICOLON Assignment RPAREN DO LBRACE Body RBRACE END
+
+Output      : OUTPUT TEXT
+            | OUTPUT ID
+            | OUTPUT Num
+            | OUTPUT LBRACKET List RBRACKET
+            | OUTPUT LBRACKET Matrix RBRACKET
+
+Comparison  : NOT Comparison 
+            | LPAREN Expression EQUAL Expression RPAREN
+            | LPAREN Expression NOT_EQUAL Expression RPAREN
+            | LPAREN Expression GREATER Expression RPAREN
+            | LPAREN Expression GREATER_EQUAL Expression RPAREN
+            | LPAREN Expression LOWER Expression RPAREN
+            | LPAREN Expression LOWER_EQUAL Expression RPAREN
+            | LPAREN Comparison AND Comparison RPAREN
+            | LPAREN Comparison OR Comparison RPAREN

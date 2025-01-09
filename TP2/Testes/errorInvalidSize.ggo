@@ -1,0 +1,4 @@
+ARRAY a(-6)
+MATRIX b (-1,3)
+
+MATRIX c KEEPS [[1,2],[3],[4,5,6]]
